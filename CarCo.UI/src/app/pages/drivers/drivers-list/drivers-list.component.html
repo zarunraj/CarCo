@@ -4,46 +4,66 @@
             <div class="card-header align-items-center d-flex">
                 <h4 class="card-title mb-0 flex-grow-1">Drivers</h4>
                 <div class="flex-shrink-0">
-                    <a href="/#/drivers/0" class="btn btn-sm btn-info edit-item-btn"
-                       >+ Add new driver</a>
+                    <a href="/#/drivers/0" class="btn btn-success waves-effect waves-light">+ Add new driver</a>
                 </div>
             </div><!-- end card header -->
             <div class="card-body pt-0">
-                <div style="margin-bottom: 15px;"></div>
-                <p-table [value]="drivers" [paginator]="true" [rows]="10">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>License No</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-driver>
-                       <tr>
-                        <td>{{driver.Name}}</td>
-                        <td>{{driver.Phone}}</td>
-                        <td>{{driver.DrivingLicenseNumber}}</td>
-                        <td>
-                            <span class="badge badge-soft-success" *ngIf="driver.IsActive">Active</span>
-                            <span class="badge badge-soft-danger" *ngIf="!driver.IsActive">Not active</span>
-                        </td>
-                        <td>
-                            <div class="d-flex gap-2 justify-content-end">
-                                <div class="edit">
-                                    <button class="btn btn-sm btn-success edit-item-btn"
-                                        (click)="navigateToDriverDetails(driver.ID)">View</button>
-                                </div>
-                                <div class="remove">
-                                    <button class="btn btn-sm btn-danger remove-item-btn" (click)="onRemoveDriverClick(driver.ID)">Remove</button>
-                                </div>
+                <div class="table-responsive table-card mt-0 mb-1">
+                    <p-table #dtDrivers [value]="drivers" [paginator]="true" [rows]="10"
+                        [globalFilterFields]="['Name','Phone','DrivingLicenseNumber' ]">
+                        <ng-template pTemplate="caption">
+                            <div class="flex">
+                                <span class="p-input-icon-left ml-auto">
+                                    <i class="pi pi-search"></i>
+                                    <input pInputText type="text"
+                                        (input)="dtDrivers.filterGlobal($any($event.target).value, 'contains')"
+                                        placeholder="Search keyword" />
+                                </span>
                             </div>
-                        </td>
-                       </tr>
-                    </ng-template>
-                </p-table>
-
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="Name">Name <p-sortIcon field="Name"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="Phone">Phone <p-sortIcon field="Phone"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="DrivingLicenseNumber">License No <p-sortIcon
+                                        field="DrivingLicenseNumber"></p-sortIcon>
+                                </th>
+                                <th>License Expiry</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-driver>
+                            <tr>
+                                <td>{{driver.Name}}</td>
+                                <td>{{driver.Phone}}</td>
+                                <td>{{driver.DrivingLicenseNumber}}</td>
+                                <td>{{driver.DrivingLicenseExpiryDate |date}}
+                                    <span class="badge badge-soft-danger" *ngIf="driver.isLicenseExpiry">
+                                        Expired</span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-soft-success" *ngIf="driver.IsActive">Active</span>
+                                    <span class="badge badge-soft-danger" *ngIf="!driver.IsActive">Not active</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-2 justify-content-end">
+                                        <div class="edit">
+                                            <button class="btn btn-sm btn-success edit-item-btn"
+                                                (click)="navigateToDriverDetails(driver.ID)">View</button>
+                                        </div>
+                                        <div class="remove">
+                                            <button class="btn btn-sm btn-danger remove-item-btn"
+                                                (click)="onRemoveDriverClick(driver.ID)">Remove</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
             </div>
         </div>
     </div>

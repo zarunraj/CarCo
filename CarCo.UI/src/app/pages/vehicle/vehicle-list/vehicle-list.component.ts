@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { CarsService } from 'src/app/shared/services/rest_api/cars.service'
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -9,7 +10,9 @@ import { CarsService } from 'src/app/shared/services/rest_api/cars.service'
 })
 export class VehicleListComponent implements OnInit {
   vehicles: any[]
-  constructor(private carsService: CarsService, private router: Router) {}
+  constructor(private carsService: CarsService,
+     private router: Router,
+     private confirmationService: ConfirmationService) {}
 
   ngOnInit(): void {
     this.loadVehicles()
@@ -32,15 +35,19 @@ export class VehicleListComponent implements OnInit {
   }
 
   onRemoveVehicleClick(id: number) {
-    if (confirm('Are you sure ?')) {
-      this.carsService.deleteCar(id).subscribe({
-        next: (result) => {
-          this.loadVehicles()
-        },
-        error: (err) => {
-          console.log(err)
-        },
-      })
-    }
+    this.confirmationService.confirm({
+      message: 'Are you sure?',
+      accept: () => {
+        this.carsService.deleteCar(id).subscribe({
+          next: (result) => {
+            this.loadVehicles()
+          },
+          error: (err) => {
+            console.log(err)
+          },
+        })
+      }
+  });
+    
   }
 }

@@ -37,7 +37,7 @@ export class CarsService extends ApiService {
     formData.append('SelectedCarID', vehicleId.toString())
     formData.append('DocumnetType', documnetType)
 
-    return this.post('api/car/photos', formData)
+    return this.post('api/cars/photos', formData)
   }
 
   updateCar(id: number, model: vehicle) {

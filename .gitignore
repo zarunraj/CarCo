@@ -5,3 +5,4 @@ CarCo.Api/WebAngularRAC/bin/**
 CarCo.Api/WebAngularRAC/obj/**
 CarCo.Api/WebAngularRAC/wwwroot/**
 CarCo.UI/node_modules/**
+CarCo.UI/.angular/**

@@ -8,41 +8,41 @@
                 </div>
             </div><!-- end card header -->
             <div class="card-body pt-0">
-                <div style="margin-bottom: 15px;"></div>
-                <p-table [value]="offers" [paginator]="true" [rows]="10">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th>Name</th>
-                            <th>Percentage</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th></th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-offer>
-                        <tr>
-                            <td>{{offer.Name}}</td>
-                            <td>{{offer.Percentage}}%</td>
-                            <td>{{offer.StartDate|date}}</td>
-                            <td>
-                                {{offer.EndDate|date}}
-                            </td>
-                            <td>
-                                <div class="d-flex gap-2 justify-content-end">
-                                    <div class="edit">
-                                        <button class="btn btn-sm btn-success edit-item-btn"
-                                            (click)="navigateToOfferDetails(offer.ID)">View</button>
+                <div class="table-responsive table-card mt-0 mb-1">
+                    <p-table [value]="offers" [paginator]="true" [rows]="10">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Name</th>
+                                <th>Percentage</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-offer>
+                            <tr>
+                                <td>{{offer.Name}}</td>
+                                <td>{{offer.Percentage}}%</td>
+                                <td>{{offer.StartDate|date}}</td>
+                                <td>
+                                    {{offer.EndDate|date}}
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-2 justify-content-end">
+                                        <div class="edit">
+                                            <button class="btn btn-sm btn-success edit-item-btn"
+                                                (click)="navigateToOfferDetails(offer.ID)">View</button>
+                                        </div>
+                                        <div class="remove">
+                                            <button class="btn btn-sm btn-danger remove-item-btn"
+                                                (click)="onRemoveOfferClick(offer.ID)">Remove</button>
+                                        </div>
                                     </div>
-                                    <div class="remove">
-                                        <button class="btn btn-sm btn-danger remove-item-btn"
-                                            (click)="onRemoveOfferClick(offer.ID)">Remove</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
             </div>
         </div>
     </div>

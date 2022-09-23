@@ -13,23 +13,31 @@
 
 
                     <div class="table-responsive table-card mt-0 mb-1">
-                        <table class="table align-middle table-nowrap" id="customerTable">
-                            <thead class="table-light">
+                        <p-table #dtvehicles [value]="vehicles" [paginator]="true" [rows]="10"
+                        [globalFilterFields]="['Registration_Number','Brand','Model_Name','Color']">
+                            <ng-template pTemplate="caption">
+                                <div class="flex">
+                                    <span class="p-input-icon-left ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text" (input)="dtvehicles.filterGlobal($any($event.target).value, 'contains')" placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
                                 <tr>
-
-                                    <th class="sort" data-sort="customer_name">#</th>
-                                    <th class="sort" data-sort="email">Brand</th>
-                                    <th class="sort" data-sort="phone">Model</th>
-                                    <th class="sort" data-sort="date">Color</th>
-                                    <th class="sort" data-sort="status">Status</th>
-                                    <th class="sort text-end" data-sort="action">Action</th>
+                                    <th class="sort" pSortableColumn="Registration_Number"># <p-sortIcon field="Registration_Number"></p-sortIcon></th>
+                                    <th class="sort" pSortableColumn="Brand">Brand <p-sortIcon field="Brand"></p-sortIcon></th>
+                                    <th class="sort" pSortableColumn="Model_Name">Model <p-sortIcon field="Model_Name"></p-sortIcon></th>
+                                    <th class="sort" pSortableColumn="Color">Color <p-sortIcon field="Color"></p-sortIcon></th>
+                                    <th class="sort" >Status</th>
+                                    <th class="sort text-end">Action</th>
                                 </tr>
-                            </thead>
-                            <tbody class="list form-check-all">
-                                <tr *ngFor="let vehicle of vehicles">
+                            </ng-template>
+                            <ng-template pTemplate="body" let-vehicle>
+                                <tr  >
                                     <td class="fw-bold text-success">
-                                        <span  (click)="navigateToVehicleDetails(vehicle.C_Id)" style="cursor: pointer;">
-                                          {{vehicle.Registration_Number}}
+                                        <span (click)="navigateToVehicleDetails(vehicle.C_Id)" style="cursor: pointer;">
+                                            {{vehicle.Registration_Number}}
                                         </span>
                                     </td>
                                     <td class="email">{{vehicle.Brand}}</td>
@@ -44,22 +52,16 @@
                                                     (click)="navigateToVehicleDetails(vehicle.C_Id)">Edit</button>
                                             </div>
                                             <div class="remove">
-                                                <button class="btn btn-sm btn-danger remove-item-btn" (click)="onRemoveVehicleClick(vehicle.C_Id)">Remove</button>
+                                                <button class="btn btn-sm btn-danger remove-item-btn"
+                                                    (click)="onRemoveVehicleClick(vehicle.C_Id)">Remove</button>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
-
-
-                            </tbody>
-                        </table>
-                        <div class="noresult" style="display: none">
-                            <div class="text-center">
-
-                                <h5 class="mt-2">Sorry! No Result Found</h5>
-
-                            </div>
-                        </div>
+                            </ng-template>
+                        </p-table>
+             
+                        
                     </div>
 
 

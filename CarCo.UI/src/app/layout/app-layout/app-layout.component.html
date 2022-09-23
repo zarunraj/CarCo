@@ -166,7 +166,7 @@
                             <!-- item-->
                             <h6 class="dropdown-header">Welcome {{loggedInUser?.Username}}!</h6>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item "  href="javascript:void(0);" (click)="onLogoutClick()" ><i
+                            <a class="dropdown-item " href="javascript:void(0);" (click)="onLogoutClick()"><i
                                     class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle" data-key="t-logout">Logout</span></a>
                         </div>
@@ -224,61 +224,45 @@
                 </div>
                 <ul class="navbar-nav" id="navbar-nav">
                     <li class="menu-title"><span data-key="t-menu"></span></li>
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="sidebarDashboards">
-                            <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Accounts</span>
-                        </a>
-                        <div class="collapse menu-dropdown" id="sidebarDashboards">
-                            <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a href="#.html" class="nav-link" data-key="t-analytics"> Account Group </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="#sidebarVehicle" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="sidebarDashboards">
-                            <i class="ri-dashboard-2-line"></i> <span data-key="t-vehicle">Vehicle</span>
-                        </a>
-                        <div class="collapse menu-dropdown" id="sidebarVehicle">
-                            <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a href="/#/vehicles" class="nav-link" data-key="t-analytics"> List </a>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="/#/customers" >
-                            <i class="ri-dashboard-2-line"></i> <span data-key="t-vehicle">Customers</span>
+                    <li class="nav-item" [routerLinkActive]="['active']">
+                        <a class="nav-link menu-link" [routerLink]="['dashboard']">
+                            <i class="ri-government-fill"></i> <span data-key="t-vehicle">Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="/#/drivers" >
-                            <i class="ri-dashboard-2-line"></i> <span data-key="t-vehicle">Drivers</span>
+
+                    <li class="nav-item" [routerLinkActive]="['active']">
+                        <a class="nav-link menu-link" [routerLink]="['vehicles']">
+                            <i class="ri-taxi-fill"></i> <span data-key="t-vehicle">Vehicles</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="/#/trips" >
-                            <i class="ri-dashboard-2-line"></i> <span data-key="t-vehicle">Trip Details</span>
+                    <li class="nav-item" [routerLinkActive]="['active']">
+                        <a class="nav-link menu-link" [routerLink]="['customers']">
+                            <i class="ri-group-line"></i> <span data-key="t-vehicle">Customers</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="/#/reviews" >
-                            <i class="ri-dashboard-2-line"></i> <span data-key="t-vehicle">Reviews</span>
+                    <li class="nav-item" [routerLinkActive]="['active']">
+                        <a class="nav-link menu-link" [routerLink]="['drivers']">
+                            <i class="ri-steering-fill"></i> <span data-key="t-vehicle">Drivers</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="/#/emergency" >
-                            <i class="ri-dashboard-2-line"></i> <span data-key="t-vehicle">Emergency</span>
+                    <li class="nav-item" [routerLinkActive]="['active']">
+                        <a class="nav-link menu-link" [routerLink]="['trips']">
+                            <i class="ri-git-merge-line"></i> <span data-key="t-vehicle">Trip Details</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="/#/offers" >
-                            <i class="ri-dashboard-2-line"></i> <span data-key="t-vehicle">Offers</span>
+                    <li class="nav-item" [routerLinkActive]="['active']">
+                        <a class="nav-link menu-link" [routerLink]="['reviews']">
+                            <i class="ri-feedback-fill"></i> <span data-key="t-vehicle">Reviews</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" [routerLinkActive]="['active']">
+                        <a class="nav-link menu-link" [routerLink]="['emergency']">
+                            <i class="ri-first-aid-kit-line"></i> <span data-key="t-vehicle">Emergency</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" [routerLinkActive]="['active']">
+                        <a class="nav-link menu-link" [routerLink]="['offers']">
+                            <i class="ri-shopping-cart-line"></i> <span data-key="t-vehicle">Offers</span>
                         </a>
                     </li>
                     <!-- end Dashboard Menu -->
@@ -300,6 +284,16 @@
         <div class="page-content">
             <div class="container-fluid">
                 <p-toast></p-toast>
+                <p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle"
+                    [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+                    <ng-template pTemplate="footer">
+                        <button class="btn btn-light btn-ghost-primary " style="width:100px ;"
+                            (click)="cd.reject()">No</button>
+                        <button class="btn btn-primary" (click)="cd.accept()" style="width:100px ;">Yes</button>
+
+                    </ng-template>
+                </p-confirmDialog>
+
                 <router-outlet></router-outlet>
 
 

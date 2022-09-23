@@ -123,7 +123,7 @@
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label class="form-label" for="gen-info-noOfPass-input">No of Passenger</label>
-                                        <input type="text" class="form-control" id="gen-info-noOfPass-input"
+                                        <input type="number" class="form-control" id="gen-info-noOfPass-input"
                                             placeholder="Enter No of passengers" name="noofpass"
                                             [(ngModel)]="vehicle.No_of_Pas">
                                     </div>
@@ -170,9 +170,10 @@
                             </div>
                             <div class="text-center">
                                 <div class="profile-user position-relative d-inline-block mx-auto mb-2">
-                                    <img src="assets/images/users/user-dummy-img.jpg"
-                                        class="rounded-circle avatar-lg img-thumbnail user-profile-image"
-                                        alt="user-profile-image">
+                                    <img *ngIf="!vehicle.Image" src="assets/images/users/user-dummy-img.jpg"
+                                        class="avatar-lg img-thumbnail user-profile-image">
+                                    <img *ngIf="vehicle.Image" [src]="getImage('car')"
+                                        class="img-thumbnail user-profile-image" style="height: 15rem; width: 15rem;">
                                     <div class="avatar-xs p-0 profile-photo-edit">
                                         <input id="profile-img-file-input" type="file" class="profile-img-file-input"
                                             accept="image/png, image/jpeg" (change)="onVehiclePhotoChange($event)">
@@ -194,7 +195,7 @@
                                 General</button>
                             <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab"
                                 data-nexttab="pills-insurance-tab"><i
-                                    class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Submit</button>
+                                    class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue</button>
                         </div>
                     </div>
                     <!-- end tab pane -->
@@ -208,9 +209,10 @@
                         <div>
                             <div class="text-center">
                                 <div class="profile-user position-relative d-inline-block mx-auto mb-2">
-                                    <img src="assets/images/users/user-dummy-img.jpg"
-                                        class="rounded-circle avatar-lg img-thumbnail user-profile-image"
-                                        alt="user-profile-image">
+                                    <img *ngIf="!vehicle.Insurance_Image" src="assets/images/users/user-dummy-img.jpg"
+                                        class="avatar-lg img-thumbnail user-profile-image">
+                                    <img *ngIf="vehicle.Insurance_Image" [src]="getImage('insurance')"
+                                        class="img-thumbnail user-profile-image" style="height: 15rem; width: 15rem;">
                                     <div class="avatar-xs p-0 profile-photo-edit">
                                         <input id="insurance-img-file-input" type="file" class="profile-img-file-input"
                                             accept="image/png, image/jpeg" (change)="onInsurancePhotoChange($event)">
@@ -245,8 +247,7 @@
                                     class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to
                                 Image</button>
                             <button type="button" class="btn btn-success btn-label right ms-auto nexttab"
-                                data-nexttab="pills-rc-tab" [ngClass]="{'d-none': !isSaved}"
-                                (click)="updateVehicle()">
+                                data-nexttab="pills-rc-tab" [ngClass]="{'d-none': !isSaved}" (click)="updateVehicle()">
                                 <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
                                 Continue</button>
                         </div>
@@ -263,9 +264,10 @@
                         <div>
                             <div class="text-center">
                                 <div class="profile-user position-relative d-inline-block mx-auto mb-2">
-                                    <img src="assets/images/users/user-dummy-img.jpg"
-                                        class="rounded-circle avatar-lg img-thumbnail user-profile-image"
-                                        alt="user-profile-image">
+                                    <img *ngIf="!vehicle.RC_Book_Image" src="assets/images/users/user-dummy-img.jpg"
+                                        class="avatar-lg img-thumbnail user-profile-image">
+                                    <img *ngIf="vehicle.RC_Book_Image" [src]="getImage('rcbook')"
+                                        class="img-thumbnail user-profile-image" style="height: 15rem; width: 15rem;">
                                     <div class="avatar-xs p-0 profile-photo-edit">
                                         <input id="rc-file-input" type="file" class="profile-img-file-input"
                                             accept="image/png, image/jpeg" (change)="onRCPhotoChange($event)">
@@ -318,9 +320,11 @@
                         <div>
                             <div class="text-center">
                                 <div class="profile-user position-relative d-inline-block mx-auto mb-2">
-                                    <img src="assets/images/users/user-dummy-img.jpg"
-                                        class="rounded-circle avatar-lg img-thumbnail user-profile-image"
-                                        alt="user-profile-image">
+                                    <img *ngIf="!vehicle.Pollution_Certificate"
+                                        src="assets/images/users/user-dummy-img.jpg"
+                                        class="avatar-lg img-thumbnail user-profile-image">
+                                    <img *ngIf="vehicle.Pollution_Certificate" [src]="getImage('pollution')"
+                                        class="img-thumbnail user-profile-image" style="height: 15rem; width: 15rem;">
                                     <div class="avatar-xs p-0 profile-photo-edit">
                                         <input id="pollution-file-input" type="file" class="profile-img-file-input"
                                             accept="image/png, image/jpeg" (change)="onPollutionPhotoChange($event)">
@@ -350,9 +354,9 @@
 
                         <div class="d-flex align-items-start gap-3 mt-4">
                             <button type="button" class="btn btn-link text-decoration-none btn-label previestab"
-                            data-previous="pills-rc-tab"><i
-                                class="ri-arrow-left-line label-icon align-middle fs-16 me-2">
-                            </i> Back to RC book</button>
+                                data-previous="pills-rc-tab"><i
+                                    class="ri-arrow-left-line label-icon align-middle fs-16 me-2">
+                                </i> Back to RC book</button>
                             <button type="button" class="btn btn-success btn-label right ms-auto nexttab"
                                 data-nexttab="pills-permit-tab" [ngClass]="{'d-none': !isSaved}"
                                 (click)="updateVehicle()">
@@ -371,9 +375,10 @@
                         <div>
                             <div class="text-center">
                                 <div class="profile-user position-relative d-inline-block mx-auto mb-2">
-                                    <img src="assets/images/users/user-dummy-img.jpg"
-                                        class="rounded-circle avatar-lg img-thumbnail user-profile-image"
-                                        alt="user-profile-image">
+                                    <img *ngIf="!vehicle.Permit_Image" src="assets/images/users/user-dummy-img.jpg"
+                                        class="avatar-lg img-thumbnail user-profile-image">
+                                    <img *ngIf="vehicle.Permit_Image" [src]="getImage('permit')"
+                                        class="img-thumbnail user-profile-image" style="height: 15rem; width: 15rem;">
                                     <div class="avatar-xs p-0 profile-photo-edit">
                                         <input id="permit-file-input" type="file" class="profile-img-file-input"
                                             accept="image/png, image/jpeg" (change)="onPermitPhotoChange($event)">
@@ -393,9 +398,9 @@
 
                         <div class="d-flex align-items-start gap-3 mt-4">
                             <button type="button" class="btn btn-link text-decoration-none btn-label previestab"
-                            data-previous="pills-pollution-tab"><i
-                                class="ri-arrow-left-line label-icon align-middle fs-16 me-2">
-                            </i> Back to Pollution</button>
+                                data-previous="pills-pollution-tab"><i
+                                    class="ri-arrow-left-line label-icon align-middle fs-16 me-2">
+                                </i> Back to Pollution</button>
                             <button type="button" class="btn btn-success btn-label right ms-auto nexttab"
                                 id="btnContinue" data-nexttab="pills-tax-tab" [ngClass]="{'d-none': !isSaved}"
                                 (click)="updateVehicle()">
@@ -414,9 +419,10 @@
                         <div>
                             <div class="text-center">
                                 <div class="profile-user position-relative d-inline-block mx-auto mb-2">
-                                    <img src="assets/images/users/user-dummy-img.jpg"
-                                        class="rounded-circle avatar-lg img-thumbnail user-profile-image"
-                                        alt="user-profile-image">
+                                    <img *ngIf="!vehicle.Tax_Image" src="assets/images/users/user-dummy-img.jpg"
+                                        class="avatar-lg img-thumbnail user-profile-image">
+                                    <img *ngIf="vehicle.Tax_Image" [src]="getImage('tax')"
+                                        class="img-thumbnail user-profile-image" style="height: 15rem; width: 15rem;">
                                     <div class="avatar-xs p-0 profile-photo-edit">
                                         <input id="tax-file-input" type="file" class="profile-img-file-input"
                                             accept="image/png, image/jpeg" (change)="onTaxPhotoChange($event)">
@@ -445,9 +451,9 @@
 
                         <div class="d-flex align-items-start gap-3 mt-4">
                             <button type="button" class="btn btn-link text-decoration-none btn-label previestab"
-                            data-previous="pills-permit-tab"><i
-                                class="ri-arrow-left-line label-icon align-middle fs-16 me-2">
-                            </i> Back to Permit</button>
+                                data-previous="pills-permit-tab"><i
+                                    class="ri-arrow-left-line label-icon align-middle fs-16 me-2">
+                                </i> Back to Permit</button>
                             <button type="button" class="btn btn-success btn-label right ms-auto nexttab"
                                 data-nexttab="pills-success-tab" [ngClass]="{'d-none': !isSaved}"
                                 (click)="updateVehicle()">

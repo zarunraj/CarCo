@@ -22,6 +22,9 @@ import { CustomerListComponent } from './pages/customers/customer-list/customer-
 import {TableModule} from 'primeng/table';
 import {SidebarModule} from 'primeng/sidebar';
 import {ToastModule} from 'primeng/toast';
+import { InputTextModule } from 'primeng/inputtext';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+
 
 import { CustomerDetailsComponent } from './pages/customers/customer-details/customer-details.component';
 import { DriversListComponent } from './pages/drivers/drivers-list/drivers-list.component';
@@ -33,7 +36,7 @@ import{BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ReviewComponent } from './pages/review/review/review.component';
 import { EmergencyListComponent } from './pages/emergency/emergency-list/emergency-list.component';
 import { EmergencyDetailsComponent } from './pages/emergency/emergency-details/emergency-details.component'
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { OffersListComponent } from './pages/offers/offers-list/offers-list.component';
 import { OfferDetailsComponent } from './pages/offers/offer-details/offer-details.component';
 
@@ -71,9 +74,11 @@ import { OfferDetailsComponent } from './pages/offers/offer-details/offer-detail
     NgxDropzoneModule,
     TableModule,
     SidebarModule,
-    ToastModule
+    ToastModule,
+    InputTextModule,
+    ConfirmDialogModule
   ],
-  providers: [AuthGuard,AuthAdminGuard, MessageService],
+  providers: [AuthGuard,AuthAdminGuard, MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,6 +3,7 @@ import { vehicle } from 'src/app/shared/models/vehicle'
 import { CarsService } from 'src/app/shared/services/rest_api/cars.service'
 
 import flatpickr from 'flatpickr'
+import { MessageService } from 'primeng/api'
 
 @Component({
   selector: 'app-new-vehicle',
@@ -19,7 +20,7 @@ export class NewVehicleComponent implements OnInit, AfterContentInit {
   permitPhoto: any
   taxPhoto: any
 
-  constructor(private carsService: CarsService) {}
+  constructor(private carsService: CarsService,private messageService: MessageService) {}
 
   ngAfterContentInit(): void {
     document.querySelectorAll('.form-steps').forEach(function (n) {
@@ -124,65 +125,78 @@ export class NewVehicleComponent implements OnInit, AfterContentInit {
   }
 
   onVehiclePhotoChange(event: any) {
-    this.vehiclePhoto = event.target.files[0]
+    this.vehicle.Image =null;
     this.carsService
-      .uploadImage(this.vehiclePhoto, this.vehicle.C_Id, 'car')
+      .uploadImage(event.target.files[0], this.vehicle.C_Id, 'car')
       .subscribe({
-        next: (data) => {
-          alert('Uploaded vehicle photo')
+        next: (data) => { 
+          this.vehicle = data
+          this.messageService.add({  severity: 'success',  summary: 'Success',  detail: 'Uploaded vehicle photo',  }) 
         },
       })
   }
 
   onInsurancePhotoChange(event: any) {
     this.insurancePhoto = event.target.files[0]
+    this.vehicle.Insurance_Image =null;
     this.carsService
       .uploadImage(this.insurancePhoto, this.vehicle.C_Id, 'insurance')
       .subscribe({
         next: (data) => {
-          alert('Uploaded insurance photo')
+          this.vehicle =data;
+          this.messageService.add({  severity: 'success',  summary: 'Success',  detail: 'Uploaded insurance photo',  }) 
+          
         },
       })
   }
   onRCPhotoChange(event: any) {
     this.rcPhoto = event.target.files[0]
+    this.vehicle.RC_Book_Image =null;
     this.carsService
       .uploadImage(this.rcPhoto, this.vehicle.C_Id, 'rcbook')
       .subscribe({
         next: (data) => {
-        alert('Uploaded RC photo')
+          this.vehicle = data
+          this.messageService.add({  severity: 'success',  summary: 'Success',  detail: 'Uploaded RC photo',  })  
         },
       })
   }
   onPollutionPhotoChange(event: any) {
     this.pollutionPhoto = event.target.files[0]
+    this.vehicle.Pollution_Certificate =null;
     this.carsService
       .uploadImage(this.pollutionPhoto, this.vehicle.C_Id, 'pollution')
       .subscribe({
         next: (data) => {
-          alert('Uploaded pollution photo')
+          this.vehicle = data
+          this.messageService.add({  severity: 'success',  summary: 'Success',  detail: 'Uploaded pollution photo',  })  
+          
         },
       })
   }
 
   onPermitPhotoChange(event: any) {
     this.permitPhoto = event.target.files[0]
+    this.vehicle.Permit_Image =null;
     this.carsService
       .uploadImage(this.permitPhoto, this.vehicle.C_Id, 'permit')
       .subscribe({
         next: (data) => {
-         alert('Uploaded permit photo')
+          this.vehicle = data
+          this.messageService.add({  severity: 'success',  summary: 'Success',  detail: 'Uploaded permit photo',  })   
         },
       })
   }
 
   onTaxPhotoChange(event: any) {
     this.taxPhoto = event.target.files[0]
+    this.vehicle.Tax_Image =null;
     this.carsService
       .uploadImage(this.taxPhoto, this.vehicle.C_Id, 'tax')
       .subscribe({
         next: (data) => {
-          alert('Uploaded Tax photo')
+          this.vehicle = data
+          this.messageService.add({  severity: 'success',  summary: 'Success',  detail: 'Uploaded Tax photo',  })    
         },
       })
   }
@@ -197,5 +211,9 @@ export class NewVehicleComponent implements OnInit, AfterContentInit {
         console.error(err)
       },
     })
+  }
+
+  getImage(type: string) {
+    return this.carsService.getImage(this.vehicle.C_Id, type)
   }
 }

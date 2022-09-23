@@ -18,7 +18,9 @@ export class DriversListComponent implements OnInit {
   loadDrivers() {
     this.driverService.getDrivers().subscribe({
       next: (data) => {
-        this.drivers = data
+        this.drivers = data.map((x:any) => {
+          return { ...x, isLicenseExpiry: new Date(x.DrivingLicenseExpiryDate) <(new Date()) }
+        })
       },
     })
   }
@@ -30,7 +32,7 @@ export class DriversListComponent implements OnInit {
     if (confirm('are you sure ?')) {
       this.driverService.deleteDriver(id).subscribe({
         next: (data) => {
-          this.loadDrivers();
+          this.loadDrivers()
         },
       })
     }

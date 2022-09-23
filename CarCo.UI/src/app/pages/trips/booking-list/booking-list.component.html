@@ -7,14 +7,31 @@
             </div><!-- end card header -->
             <div class="card-body pt-0">
                 <div style="margin-bottom: 15px;"></div>
-                <p-table [value]="bookings" [paginator]="true" [rows]="10">
+                <p-table #dtBooking [value]="bookings" [paginator]="true" [rows]="10" [globalFilterFields]="['book.TripNumber','book.StartLocation','book.EndLocation','car.Model_Name','driver.Name' ]">
+                    <ng-template pTemplate="caption">
+                        <div class="flex">
+                            <span class="p-input-icon-left ml-auto">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text"
+                                    (input)="dtBooking.filterGlobal($any($event.target).value, 'contains')"
+                                    placeholder="Search keyword" />
+                            </span>
+                        </div>
+                    </ng-template>
                     <ng-template pTemplate="header">
                         <tr>
-                            <th>#</th>
-                            <th>From</th>
-                            <th>To</th>
-                            <th>Vehicle</th>
-                            <th>Driver</th>
+                            <th pSortableColumn="book.TripNumber"># <p-sortIcon field="book.TripNumber"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="book.StartLocation">From <p-sortIcon field="book.StartLocation">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="book.EndLocation">To <p-sortIcon field="book.EndLocation"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="car.Model_Name">Vehicle <p-sortIcon field="car.Model_Name">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="driver.Name">Driver <p-sortIcon field="driver.Name"></p-sortIcon>
+                            </th>
                             <th></th>
                         </tr>
                     </ng-template>
