@@ -12,6 +12,7 @@
                     <p-table [value]="emergencies" [paginator]="true" [rows]="10">
                         <ng-template pTemplate="header">
                             <tr>
+                                <th>Name</th>
                                 <th>Location</th>
                                 <th>Phone</th>
                                 <th>Type</th>
@@ -20,7 +21,12 @@
                         </ng-template>
                         <ng-template pTemplate="body" let-eme>
                             <tr>
-                                <td>{{eme.Location}}</td>
+                                <td>
+                                    <strong>
+                                        {{eme.Name}}
+                                    </strong>
+                                </td>
+                                <td>{{eme.LatitudeandLongitude}}</td>
                                 <td>{{eme.ContactNumber}}</td>
                                 <td>{{eme.Type}}</td>
                                 <td class="d-flex justify-content-end">

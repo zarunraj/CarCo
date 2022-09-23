@@ -1,6 +1,7 @@
 export class Emergency{
     ID:number;
-    Location:string;
+    LatitudeandLongitude:string;
+    Name:string;
     Type:string;
     ContactNumber:string;
 }
