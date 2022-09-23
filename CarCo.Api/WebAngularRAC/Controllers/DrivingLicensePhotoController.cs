@@ -13,7 +13,7 @@ using WebAngularRAC.Filters;
 namespace WebAngularRAC.Controllers
 {
     [TypeFilter(typeof(APIAdminAuthorizeAttribute))]
-    [Route("api/[controller]")]
+    [Route("api/driver")]
     public class DrivingLicensePhotoController : Controller
     {
 
@@ -26,7 +26,7 @@ namespace WebAngularRAC.Controllers
         }
 
 
-
+        [Route("upload")]
         [HttpPost]
         public async Task<IActionResult> UploadFiles([FromHeader] DriverDocumentClass ReceiverClass)
         {
@@ -49,12 +49,14 @@ namespace WebAngularRAC.Controllers
 
                 Dictionary<string, string> map = new Dictionary<string, string>()
                 {
-                    {"license","DrivingLicense" } 
+                    {"license","DrivingLicense" } ,
+                    {"profile","DriverProfile" } 
                 };
 
                 folderPath = map[ReceiverClass.DocumnetType];
 
                 var uploads = Path.Combine(_environment.WebRootPath, folderPath);
+                Directory.CreateDirectory(uploads);
 
                 foreach (var file in files)
                 {
@@ -85,7 +87,10 @@ namespace WebAngularRAC.Controllers
                     {
                         case "license":
                             driver.DrivingLicenseImage = PathDB;
-                            break; 
+                            break;
+                        case "profile":
+                            driver.ProfileImage = PathDB;
+                            break;
                         default:
                             break;
                     }

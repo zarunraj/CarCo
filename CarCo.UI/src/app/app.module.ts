@@ -41,6 +41,7 @@ import { OffersListComponent } from './pages/offers/offers-list/offers-list.comp
 import { OfferDetailsComponent } from './pages/offers/offer-details/offer-details.component'; 
 import { VehicleTypesComponent } from './pages/vehicle-types/VehicleTypes-List/vehicle-types.component';
 import { VehicleTypeDetailsComponent } from './pages/vehicle-types/vehicle-type-details/vehicle-type-details.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { VehicleTypeDetailsComponent } from './pages/vehicle-types/vehicle-type-
     SidebarModule,
     ToastModule,
     InputTextModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    TooltipModule
   ],
   providers: [AuthGuard,AuthAdminGuard, MessageService, ConfirmationService],
   bootstrap: [AppComponent]

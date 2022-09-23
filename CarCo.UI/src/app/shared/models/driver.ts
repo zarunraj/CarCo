@@ -9,6 +9,9 @@ export class Driver {
   DrivingLicenseImage:string
   IsActive: boolean
 
+  ProfileImage:string
+  IsOnline:boolean
+  CurrentLocation:string
   constructor(){
     this.ID =0
   }

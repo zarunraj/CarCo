@@ -19,6 +19,7 @@ namespace WebAngularRAC.Models
         public string DrivingLicenseImage { get; set; }
         public DateTime CreatedOn { get; set; }
         public bool IsActive { get; set; }
+        public bool IsOnline { get; set; }
         public string ProfileImage { get; set; }
         public string CurrentLocation { get; set; }
 

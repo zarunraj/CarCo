@@ -31,18 +31,31 @@
                                         field="DrivingLicenseNumber"></p-sortIcon>
                                 </th>
                                 <th>License Expiry</th>
+                                <th>Location</th>
                                 <th></th>
                                 <th></th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-driver>
                             <tr>
-                                <td>{{driver.Name}}</td>
+                                <td>
+                                    <div pTooltip="{{driver.Name + ' is ' + (driver.IsOnline?'online':'offline')}}" tooltipPosition="top">
+                                        <i class="align-middle fs-15 mdi mdi-circle"
+                                            [ngClass]="{'text-danger': !driver.IsOnline,'text-success': driver.IsOnline}"></i>{{driver.Name}}
+                                    </div>
+                                </td>
                                 <td>{{driver.Phone}}</td>
                                 <td>{{driver.DrivingLicenseNumber}}</td>
                                 <td>{{driver.DrivingLicenseExpiryDate |date}}
                                     <span class="badge badge-soft-danger" *ngIf="driver.isLicenseExpiry">
                                         Expired</span>
+                                </td>
+                                <td>
+                                    <div *ngIf="driver.CurrentLocation">
+                                        <a href="https://www.google.com/maps/place/{{driver.CurrentLocation}}"
+                                            target="_blank">
+                                            {{driver.CurrentLocation}}<i class="ri-external-link-fill"></i></a>
+                                    </div>
                                 </td>
                                 <td>
                                     <span class="badge badge-soft-success" *ngIf="driver.IsActive">Active</span>

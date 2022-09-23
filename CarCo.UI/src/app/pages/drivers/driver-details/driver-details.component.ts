@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute, ParamMap } from '@angular/router'
+import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import flatpickr from 'flatpickr'
 import { MessageService } from 'primeng/api'
 import { switchMap, of } from 'rxjs'
@@ -17,10 +17,12 @@ export class DriverDetailsComponent implements OnInit {
   driver: Driver
   mode = 'view'
   drivingLicenseUrl = ''
+  driverProfilePhoto = ''
   constructor(
     private driverService: DriversService,
-    private route: ActivatedRoute,  private messageService: MessageService,
-  ) {}
+    private route: ActivatedRoute, private messageService: MessageService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.driver = new Driver()
@@ -49,9 +51,19 @@ export class DriverDetailsComponent implements OnInit {
       next: (data) => {
         this.driver = data
         this.drivingLicenseUrl = `${environment.apiUrl}/api/driver/${this.driverId}/drivinglicense`
+        this.setProfilePhotoUrl();
       },
       error: (err) => console.error(err),
     })
+  }
+  setProfilePhotoUrl() {
+    this.driverProfilePhoto = 'assets/images/users/user-dummy-img.jpg'
+    if (this.driver.ProfileImage) {
+      setTimeout(() => {
+
+        this.driverProfilePhoto = `${environment.apiUrl}/api/driver/${this.driverId}/profilePhoto?key=${Math.random()}`
+      }, 500);
+    }
   }
 
   getDriverId(callback: Function) {
@@ -82,7 +94,12 @@ export class DriverDetailsComponent implements OnInit {
             summary: 'Success',
             detail: 'Saved successfully',
           })
-        },
+        },error:(err)=>{
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error', 
+          })
+        }
       })
     } else {
       this.driverService.save(this.driver).subscribe({
@@ -94,7 +111,14 @@ export class DriverDetailsComponent implements OnInit {
             summary: 'Success',
             detail: 'Saved successfully',
           })
-        },
+          this.setProfilePhotoUrl()
+          this.router.navigateByUrl('drivers/' + this.driverId)
+        },error:(err)=>{
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error', 
+          })
+        }
       })
     }
   }
@@ -104,11 +128,28 @@ export class DriverDetailsComponent implements OnInit {
 
     this.driverService.uploadLicense(this.driverId, image).subscribe({
       next: (data) => {
-        alert('image uploaded');
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Image Saved successfully',
+        })
         this.drivingLicenseUrl = `${environment.apiUrl}/api/driver/${this.driverId}/drivinglicense`
-    
       },
     })
- 
+  }
+
+  onDriverPhotoChange(event: any) {
+    let image = event.target.files[0]
+    this.driverService.uploadDriverPhoto(this.driverId, image).subscribe({
+      next: (data) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Image Saved successfully',
+        })
+        this.driver = data;
+        this.setProfilePhotoUrl();
+      },
+    })
   }
 }

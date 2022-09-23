@@ -18,7 +18,7 @@ namespace WebAngularRAC.Controllers
         DatabaseContext _DatabaseContext;
         private readonly IHostingEnvironment hostingEnvironment;
 
-        public DriverController(DatabaseContext databasecontext , IHostingEnvironment hostingEnvironment)
+        public DriverController(DatabaseContext databasecontext, IHostingEnvironment hostingEnvironment)
         {
             _DatabaseContext = databasecontext;
             this.hostingEnvironment = hostingEnvironment;
@@ -29,7 +29,7 @@ namespace WebAngularRAC.Controllers
         public DriverTB[] Get()
         {
             try
-            { 
+            {
                 var results = _DatabaseContext.DriverTB.ToList();
                 return results.ToArray();
             }
@@ -63,7 +63,7 @@ namespace WebAngularRAC.Controllers
                 drivertb.IsActive = true;
                 _DatabaseContext.Add(drivertb);
                 _DatabaseContext.SaveChanges();
-                return Ok( drivertb);
+                return Ok(drivertb);
             }
             catch (Exception)
             {
@@ -92,11 +92,11 @@ namespace WebAngularRAC.Controllers
                 {
                     IsActive = true,
                     Name = Convert.ToString(id),
-                    Address = Convert.ToString(drivertb.Address), 
+                    Address = Convert.ToString(drivertb.Address),
                     DrivingLicenseExpiryDate = Convert.ToDateTime(drivertb.DrivingLicenseExpiryDate),
-                    DrivingLicenseNumber=Convert.ToString(drivertb.DrivingLicenseNumber),
+                    DrivingLicenseNumber = Convert.ToString(drivertb.DrivingLicenseNumber),
                     Email = Convert.ToString(drivertb.Email),
-                    Phone = Convert.ToString(drivertb.Phone), 
+                    Phone = Convert.ToString(drivertb.Phone),
                 };
 
                 var db = _DatabaseContext;
@@ -105,7 +105,7 @@ namespace WebAngularRAC.Controllers
                 db.Entry(driverupdate).Property(x => x.Address).IsModified = true;
                 db.Entry(driverupdate).Property(x => x.DrivingLicenseExpiryDate).IsModified = true;
                 db.Entry(driverupdate).Property(x => x.DrivingLicenseNumber).IsModified = true;
-                db.Entry(driverupdate).Property(x => x.Email).IsModified = true; 
+                db.Entry(driverupdate).Property(x => x.Email).IsModified = true;
                 db.Entry(driverupdate).Property(x => x.Phone).IsModified = true;
                 db.Entry(driverupdate).Property(x => x.IsActive).IsModified = true;
                 db.SaveChanges();
@@ -142,6 +142,21 @@ namespace WebAngularRAC.Controllers
             var driver = await _DatabaseContext.DriverTB.FindAsync(id);
 
             var pathDB = driver.DrivingLicenseImage;
+            pathDB = string.IsNullOrEmpty(pathDB) ? "images\\no-image.jpg" : pathDB;
+            var imagePath = Path.Combine(hostingEnvironment.WebRootPath, pathDB);
+
+            return new PhysicalFileResult(imagePath, "image/jpeg");
+
+        }
+
+
+        [Route("{id}/profilePhoto")]
+        [HttpGet()]
+        public async Task<IActionResult> GetDriverProfilePhoto([FromRoute] int id, [FromQuery] string type)
+        {
+            var driver = await _DatabaseContext.DriverTB.FindAsync(id);
+
+            var pathDB = driver.ProfileImage;
             pathDB = string.IsNullOrEmpty(pathDB) ? "images\\no-image.jpg" : pathDB;
             var imagePath = Path.Combine(hostingEnvironment.WebRootPath, pathDB);
 

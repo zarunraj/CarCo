@@ -40,7 +40,16 @@ export class DriversService extends ApiService {
     formData.append('SelectedDriverID', driverId.toString())
     formData.append('DocumnetType', 'license')
 
-    return this.post('api/DrivingLicensePhoto', formData)
+    return this.post('api/driver/upload', formData)
+  }
+
+  uploadDriverPhoto(driverId: number, image: any) {
+    const formData = new FormData()
+    formData.append('file', image)
+    formData.append('SelectedDriverID', driverId.toString())
+    formData.append('DocumnetType', 'profile')
+
+    return this.post('api/driver/upload', formData)
   }
 
   deleteDriver(id: number) {
