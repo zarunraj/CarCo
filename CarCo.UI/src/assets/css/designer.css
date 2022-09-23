@@ -1,0 +1,7 @@
+.page-title-box{
+    margin: 0px !important;
+}
+
+.page-content {
+    padding: calc(109px + 1.5rem) calc(1.5rem / 2) 60px calc(1.5rem / 2) !important;
+}

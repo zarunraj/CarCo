@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Offer Details</h4>
+                <div class="flex-shrink-0">
+                    <button type="button" *ngIf="mode=='view'" class="btn btn-success waves-effect waves-light"
+                        (click)="switchToEditMode()">Edit</button>
+                </div>
+            </div><!-- end card header -->
+            <div class="card-body pt-0">
+
+                <table class="table" *ngIf="offer">
+                    <tr>
+                        <td><strong>Name</strong></td>
+                        <td>
+
+                            <span *ngIf="mode=='view'">{{offer.Name}}</span>
+                            <ng-container *ngIf="mode=='edit'">
+                                <input class="form-control" type="text" [(ngModel)]="offer.Name">
+                            </ng-container>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Percentage</strong></td>
+                        <td><span *ngIf="mode=='view'">{{offer.Percentage}}%</span>
+                            <ng-container *ngIf="mode=='edit'">
+                                <div class="input-group ">
+
+                                    <input class="form-control" type="text" [(ngModel)]="offer.Percentage">
+                                    <span class="input-group-text" id="inputGroupPrepend">%</span>
+                                </div>
+                            </ng-container>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Start Date</strong></td>
+                        <td><span *ngIf="mode=='view'">{{offer.StartDate|date}}</span>
+                            <div *ngIf="mode=='edit'">
+                                <input class="form-control" type="text" [(ngModel)]="offer.StartDate" id="dtpStartDate">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>End Date</strong></td>
+                        <td> <span *ngIf="mode=='view'">{{offer.EndDate|date}}</span>
+                            <div *ngIf="mode=='edit'">
+                                <input class="form-control" type="text" [(ngModel)]="offer.EndDate" id="dtpEndDate">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr *ngIf="mode=='edit' && offer.ID>0">
+                        <td><strong>Image</strong></td>
+                        <td><input class="form-control" type="file" id="formFile" (change)="onImageChange($event)">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Details</strong></td>
+                        <td><span *ngIf="mode=='view'">{{offer.Details}}</span>
+                            <ng-container *ngIf="mode=='edit'">
+
+                                <textarea class="form-control" rows="3" [(ngModel)]="offer.Details"></textarea>
+                                <div [style.display]="offer.Details.length >250?'block':'none'"
+                                    class="invalid-feedback">
+                                    max 250 charactors.
+                                </div>
+                            </ng-container>
+                        </td>
+                    </tr>
+
+                    <tr></tr>
+                </table>
+
+                <div class="d-flex justify-content-center" *ngIf="mode=='view'">
+                    <a href="/#/offers" class="btn btn-soft-dark mt-5">Back to offers</a>
+                </div>
+            </div>
+            <div class="card-footer" *ngIf="mode=='edit'">
+                <div class="d-flex gap-2 justify-content-end">
+
+                    <button class="btn btn-outline-secondary waves-effect waves-light" (click)="mode='view'">Cancel
+                    </button>
+                    <button class="btn btn-primary waves-effect waves-light" (click)="onSaveClick()">Save </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

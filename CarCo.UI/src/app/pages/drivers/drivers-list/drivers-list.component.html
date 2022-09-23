@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Drivers</h4>
+                <div class="flex-shrink-0">
+                    <a href="/#/drivers/0" class="btn btn-sm btn-info edit-item-btn"
+                       >+ Add new driver</a>
+                </div>
+            </div><!-- end card header -->
+            <div class="card-body pt-0">
+                <div style="margin-bottom: 15px;"></div>
+                <p-table [value]="drivers" [paginator]="true" [rows]="10">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>License No</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-driver>
+                       <tr>
+                        <td>{{driver.Name}}</td>
+                        <td>{{driver.Phone}}</td>
+                        <td>{{driver.DrivingLicenseNumber}}</td>
+                        <td>
+                            <span class="badge badge-soft-success" *ngIf="driver.IsActive">Active</span>
+                            <span class="badge badge-soft-danger" *ngIf="!driver.IsActive">Not active</span>
+                        </td>
+                        <td>
+                            <div class="d-flex gap-2 justify-content-end">
+                                <div class="edit">
+                                    <button class="btn btn-sm btn-success edit-item-btn"
+                                        (click)="navigateToDriverDetails(driver.ID)">View</button>
+                                </div>
+                                <div class="remove">
+                                    <button class="btn btn-sm btn-danger remove-item-btn" (click)="onRemoveDriverClick(driver.ID)">Remove</button>
+                                </div>
+                            </div>
+                        </td>
+                       </tr>
+                    </ng-template>
+                </p-table>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+.user-comment {
+  display: flex;
+  flex-direction: column;
+  border: dashed 1px #ddd;
+  margin: 10px;
+  padding: 15px;
+}
+
+.comment-top {
+  display: flex;
+  flex-direction: row;
+}
+
+.comment-left {
+  margin-right: 20px;
+}
+.comment-user-name {
+  font-weight: bold;
+  color: #555;
+}
+
+.comment-center {
+  flex-grow: 1;
+}

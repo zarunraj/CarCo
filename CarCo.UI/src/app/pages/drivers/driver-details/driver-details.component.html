@@ -1,0 +1,112 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Drivers</h4>
+                <div class="flex-shrink-0">
+                    <button type="button" *ngIf="mode=='view'" class="btn btn-success waves-effect waves-light"
+                        (click)="switchToEditMode()">Edit</button>
+                </div>
+            </div><!-- end card header -->
+            <div class="card-body pt-0">
+
+                <table class="table" *ngIf="driver">
+                    <tr>
+                        <td><strong>Name</strong></td>
+                        <td>
+
+                            <span *ngIf="mode=='view'">{{driver.Name}}</span>
+                            <ng-container *ngIf="mode=='edit'">
+                                <input class="form-control" type="text" [(ngModel)]="driver.Name">
+                            </ng-container>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Phone</strong></td>
+                        <td><span *ngIf="mode=='view'">{{driver.Phone}}</span>
+                            <ng-container *ngIf="mode=='edit'">
+                                <input class="form-control" type="text" [(ngModel)]="driver.Phone">
+                            </ng-container>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email</strong></td>
+                        <td><span *ngIf="mode=='view'">{{driver.Email}}</span>
+                            <ng-container *ngIf="mode=='edit'">
+                                <input class="form-control" type="email" [(ngModel)]="driver.Email">
+                            </ng-container>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Address</strong></td>
+                        <td><span *ngIf="mode=='view'">{{driver.Address}}</span>
+                            <ng-container *ngIf="mode=='edit'">
+                                <input class="form-control" type="text" [(ngModel)]="driver.Address">
+                            </ng-container>
+                        </td>
+                    </tr>
+                    <tr *ngIf="mode=='edit' && driver.ID>0">
+                        <td><strong>Driving License</strong></td>
+                        <td><input class="form-control" type="file" id="formFile"
+                                (change)="onDrivingLicensePhotoChange($event)"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Driving License No</strong></td>
+                        <td><span *ngIf="mode=='view'">{{driver.DrivingLicenseNumber}}</span>
+                            <ng-container *ngIf="mode=='edit'">
+                                <input class="form-control" type="text" [(ngModel)]="driver.DrivingLicenseNumber">
+                            </ng-container>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>License Expiry</strong></td>
+                        <td><span *ngIf="mode=='view'">{{driver.DrivingLicenseExpiryDate|date}}</span>
+                            <ng-container *ngIf="mode=='edit'">
+                                <input id="dtpExpiry" class="form-control" type="text"
+                                    [(ngModel)]="driver.DrivingLicenseExpiryDate">
+                            </ng-container>
+                        </td>
+                    </tr>
+                    <tr *ngIf="false">
+                        <td><strong></strong></td>
+                        <td><span *ngIf="mode=='view'">{{driver.IsActive ? 'Active':'Not active'}}</span>
+                            <ng-container *ngIf="mode=='edit'">
+                                <div>
+
+                                    <div class="form-check form-switch form-switch-md form-switch-success mb-3"
+                                        dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="isDriverActive"
+                                            [(ngModel)]="driver.IsActive">
+                                        <label class="form-check-label" for="isDriverActive">Active</label>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </td>
+                    </tr>
+                    <tr *ngIf="driver.DrivingLicenseImage">
+                        <td></td>
+                        <td>
+                            <a href='{{drivingLicenseUrl}}' target="_blank" class="d-inline-flex"
+                                style="align-items: end">
+                                <i class='bx bx-download fs-22' style="margin-right: 10px;"></i>
+                                <span> Download driving license</span></a>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                </table>
+
+                <div class="d-flex justify-content-center" *ngIf="mode=='view'">
+                    <a href="/#/drivers" class="btn btn-soft-dark mt-5">Back to drivers</a>
+                </div>
+            </div>
+            <div class="card-footer" *ngIf="mode=='edit'">
+                <div class="d-flex gap-2 justify-content-end">
+
+                    <button class="btn btn-outline-secondary waves-effect waves-light" (click)="mode='view'">Cancel
+                    </button>
+                    <button class="btn btn-primary waves-effect waves-light" (click)="onSaveClick()">Save </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,455 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card mt-n4 mx-n4">
+            <div class="bg-soft-warning">
+                <div class="card-body pb-0 px-4">
+                    <ng-container *ngIf="vehicle">
+                        <div class="row mb-3">
+                            <div class="col-md">
+                                <div class="row align-items-center g-3">
+                                    <div class="col-md-auto">
+                                        <div class="avatar-md">
+                                            <div class="avatar-title bg-white rounded-circle">
+                                                <img src="assets/images/brands/slack.png" alt="" class="avatar-xs">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md">
+                                        <div>
+                                            <h4 class="fw-bold">{{vehicle.Registration_Number}}</h4>
+                                            <div class="hstack gap-3 flex-wrap">
+                                                <div><i class="ri-building-line align-bottom me-1"></i>
+                                                    {{vehicle.Model_Name}}</div>
+                                                <div class="vr"></div>
+                                                <div><i class="ri-building-line align-bottom me-1"></i>
+                                                    {{vehicle.Brand}}
+                                                </div>
+                                                <div class="vr"></div>
+                                                <div>Insurance till : <span
+                                                        class="fw-medium">{{vehicle.Insurance_Expiry|date}}</span></div>
+                                                <div class="vr"></div>
+                                                <div>Tax till : <span
+                                                        class="fw-medium">{{vehicle.Tax_Expiry|date}}</span></div>
+                                                <div class="vr"></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="hstack gap-1 flex-wrap">
+                                    <button class="btn btn-sm btn-soft-danger edit-item-btn"
+                                        (click)="switchToEditMode()"><i class="ri-pencil-line"></i> Edit</button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul class="nav nav-tabs-custom border-bottom-0" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link fw-semibold active" data-bs-toggle="tab" href="#vehicle-overview"
+                                    role="tab" aria-selected="true">
+                                    Overview
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#vehicle-insurance"
+                                    role="tab" aria-selected="false">
+                                    Insurance
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#vehicle-tax" role="tab"
+                                    aria-selected="false">
+                                    Tax
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#vehicle-pollution"
+                                    role="tab">
+                                    Pollution
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#vehicle-rc" role="tab">
+                                    RC Book
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#vehicle-permit" role="tab">
+                                    Permit
+                                </a>
+                            </li>
+                        </ul>
+                    </ng-container>
+                </div>
+                <!-- end card body -->
+            </div>
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="tab-content text-muted" *ngIf="vehicle">
+                    <div class="tab-pane fade show active" id="vehicle-overview" role="tabpanel">
+
+                        <div class="d-flex align-items-center mb-4">
+                            <h5 class="card-title flex-grow-1">Vehicle Details</h5>
+                        </div>
+
+                        <div class="row d-flex ">
+                            <div class="col-md-6" style="
+                            align-self: center;
+                            align-items: center;
+                            justify-content: center;
+                        ">
+                                <ng-container *ngIf="pageMode =='edit'">
+                                    <ngx-dropzone (change)="onVehiclePhotoChange($event)">
+                                        <ngx-dropzone-label>Drop photo here</ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
+                                            [removable]="true" *ngFor="let f of vehiclePhoto" [file]="f"
+                                            (removed)="onRemove(f)">
+
+                                        </ngx-dropzone-image-preview>
+                                    </ngx-dropzone>
+                                </ng-container>
+                                <ng-container *ngIf="pageMode =='view'">
+                                    <div class="flex-shrink-0 text-center mb-2">
+
+                                        <img [src]="getImage('car')" alt="" style="width: 100%;">
+
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table">
+                                    <tr>
+                                        <td><strong>Registration Number</strong></td>
+                                        <td>
+                                            <ng-container *ngIf="pageMode =='edit'">
+                                                <input type="text" class="form-control"
+                                                    [(ngModel)]="vehicle.Registration_Number">
+                                            </ng-container>
+                                            <ng-container *ngIf="pageMode =='view'">
+                                                <span>{{vehicle.Registration_Number}}</span>
+                                            </ng-container>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Model</strong></td>
+                                        <td>
+                                            <ng-container *ngIf="pageMode =='edit'">
+                                                <input type="text" class="form-control"
+                                                    [(ngModel)]="vehicle.Model_Name">
+                                            </ng-container>
+                                            <ng-container *ngIf="pageMode =='view'">
+                                                <span>{{vehicle.Model_Name}}</span>
+                                            </ng-container>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Brand</strong></td>
+                                        <td>
+                                            <ng-container *ngIf="pageMode =='edit'">
+                                                <input type="text" class="form-control" [(ngModel)]="vehicle.Brand">
+                                            </ng-container>
+                                            <ng-container *ngIf="pageMode =='view'">
+                                                <span>{{vehicle.Brand}}</span>
+                                            </ng-container>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Color</strong></td>
+                                        <td>
+                                            <ng-container *ngIf="pageMode =='edit'">
+                                                <select class="form-control" [(ngModel)]="vehicle.Color" name="color">
+                                                    <option value="Black">Black</option>
+                                                    <option value="White">White</option>
+                                                    <option value="Red">Red</option>
+                                                    <option value="Silver">Silver</option>
+                                                    <option value="Blue">Blue</option>
+                                                    <option value="Brown">Brown</option>
+                                                    <option value="Orange">Orange</option>
+                                                </select>
+                                            </ng-container>
+                                            <ng-container *ngIf="pageMode =='view'">
+                                                <span>{{vehicle.Color}}</span>
+                                            </ng-container>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>No of passengers</strong></td>
+                                        <td>
+                                            <ng-container *ngIf="pageMode =='edit'">
+                                                <input type="text" class="form-control" id="gen-info-noOfPass-input"
+                                                    placeholder="Enter No of passengers" name="noofpass"
+                                                    [(ngModel)]="vehicle.No_of_Pas">
+                                            </ng-container>
+                                            <ng-container *ngIf="pageMode =='view'">
+                                                <span>{{vehicle.No_of_Pas}}</span>
+                                            </ng-container>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><strong>Fuel Type</strong></td>
+                                        <td>
+                                            <ng-container *ngIf="pageMode =='edit'">
+                                                <select class="form-control" [(ngModel)]="vehicle.Fueltype"
+                                                    name="fueltype">
+                                                    <option value="Petrol">Petrol</option>
+                                                    <option value="Diesel">Diesel</option>
+                                                    <option value="Gas">Gas</option>
+                                                    <option value="Electric">Electric</option>
+                                                </select>
+                                            </ng-container>
+                                            <ng-container *ngIf="pageMode =='view'">
+                                                <span>{{vehicle.Fueltype}}</span>
+                                            </ng-container>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+
+                        </div>
+
+
+
+                    </div>
+                    <!-- end tab pane -->
+                    <div class="tab-pane fade" id="vehicle-insurance" role="tabpanel">
+
+                        <div class="d-flex align-items-center mb-4">
+                            <h5 class="card-title flex-grow-1">Insurance</h5>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-lg-6">
+                                <ng-container *ngIf="pageMode =='edit'">
+                                    <ngx-dropzone (change)="onInsurancePhotoChange($event)">
+                                        <ngx-dropzone-label>Drop photo here</ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
+                                            [removable]="true" *ngFor="let f of insurancePhoto" [file]="f"
+                                            (removed)="onRemove(f)">
+
+                                        </ngx-dropzone-image-preview>
+                                    </ngx-dropzone>
+                                </ng-container>
+                                <ng-container *ngIf="pageMode =='view'">
+                                    <div class="flex-shrink-0 text-center mb-2">
+                                        <img [src]="getImage('insurance')" alt="" style="width: 100%;">
+
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <strong class="form-label">Insurance Expiry Date</strong>
+                                    <ng-container *ngIf="pageMode =='view'">
+                                        <span class="m-3">{{vehicle.Insurance_Expiry|date}}</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="pageMode =='edit'">
+                                        <input type="text" class="form-control" id="dtpInsuranceExpiry"
+                                            placeholder="Insurance Expiry" name="insExp"
+                                            [(ngModel)]="vehicle.Insurance_Expiry">
+                                    </ng-container>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- end tab pane -->
+
+                    <!-- tab pane -->
+                    <div class="tab-pane fade" id="vehicle-rc" role="tabpanel">
+
+                        <div class="d-flex align-items-center mb-4">
+                            <h5 class="card-title flex-grow-1">RC Book</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ng-container *ngIf="pageMode =='edit'">
+                                    <ngx-dropzone (change)="onRCPhotoChange($event)">
+                                        <ngx-dropzone-label>Drop photo here</ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
+                                            [removable]="true" *ngFor="let f of rcPhoto" [file]="f"
+                                            (removed)="onRemove(f)">
+
+                                        </ngx-dropzone-image-preview>
+                                    </ngx-dropzone>
+                                </ng-container>
+                                <ng-container *ngIf="pageMode =='view'">
+                                    <div class="flex-shrink-0 text-center mb-2">
+                                        <img [src]="getImage('rcbook')" alt="" style="width: 100%;">
+
+                                    </div>
+                                </ng-container>
+                            </div>
+                            
+                            <div class="col-lg-6">
+
+                                <div class="mb-3">
+                                    <strong class="form-label">RC Book Expiry Date: </strong>
+                                    <ng-container *ngIf="pageMode =='view'">
+                                        <span class="m-3">{{vehicle.RC_Book_ValidityDate|date}}</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="pageMode =='edit'">
+                                        <input type="text" class="form-control" id="dtpRCExpiry"
+                                            placeholder="RC Book Expiry" name="rcExp"
+                                            [(ngModel)]="vehicle.RC_Book_ValidityDate">
+                                    </ng-container>
+                                
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- end tab pane -->
+
+                    <!-- Pollution tab pane -->
+                    <div class="tab-pane fade" id="vehicle-pollution" role="tabpanel">
+
+                        <div class="d-flex align-items-center mb-4">
+                            <h5 class="card-title flex-grow-1">Pollution</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ng-container *ngIf="pageMode =='edit'">
+                                    <ngx-dropzone (change)="onPollutionPhotoChange($event)">
+                                        <ngx-dropzone-label>Drop photo here</ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
+                                            [removable]="true" *ngFor="let f of pollutionPhoto" [file]="f"
+                                            (removed)="onRemove(f)">
+
+                                        </ngx-dropzone-image-preview>
+                                    </ngx-dropzone>
+                                </ng-container>
+                                <ng-container *ngIf="pageMode =='view'">
+                                    <div class="flex-shrink-0 text-center mb-2">
+                                        <img [src]="getImage('pollution')" alt="" style="width: 100%;">
+
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <strong class="form-label">Pollution Expiry Date: </strong>
+                                    <ng-container *ngIf="pageMode =='view'">
+                                        <span class="m-3">{{vehicle.Pollution_Expiry|date}}</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="pageMode =='edit'">
+                                        <input type="text" class="form-control" id="dtpPollutionExpiry"
+                                            placeholder="Pollution Expiry" name="rcExp"
+                                            [(ngModel)]="vehicle.Pollution_Expiry">
+                                    </ng-container>
+                                
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- end tab pane -->
+
+                    <!-- Permit tab pane -->
+                    <div class="tab-pane fade" id="vehicle-permit" role="tabpanel">
+
+                        <div class="d-flex align-items-center mb-4">
+                            <h5 class="card-title flex-grow-1">Permit</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ng-container *ngIf="pageMode =='edit'">
+                                    <ngx-dropzone (change)="onPermitPhotoChange($event)">
+                                        <ngx-dropzone-label>Drop photo here</ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
+                                            [removable]="true" *ngFor="let f of permitPhoto" [file]="f"
+                                            (removed)="onRemove(f)">
+
+                                        </ngx-dropzone-image-preview>
+                                    </ngx-dropzone>
+                                </ng-container>
+                                <ng-container *ngIf="pageMode =='view'">
+                                    <div class="flex-shrink-0 text-center mb-2">
+                                        <img [src]="getImage('permit')" alt="" style="width: 100%;">
+
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- end tab pane -->
+
+                    <!-- Tax tab pane -->
+                    <div class="tab-pane fade" id="vehicle-tax" role="tabpanel">
+
+                        <div class="d-flex align-items-center mb-4">
+                            <h5 class="card-title flex-grow-1">Tax Document</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ng-container *ngIf="pageMode =='edit'">
+                                    <ngx-dropzone (change)="onTaxPhotoChange($event)">
+                                        <ngx-dropzone-label>Drop photo here</ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
+                                            [removable]="true" *ngFor="let f of taxPhoto" [file]="f"
+                                            (removed)="onRemove(f)">
+
+                                        </ngx-dropzone-image-preview>
+                                    </ngx-dropzone>
+                                </ng-container>
+                                <ng-container *ngIf="pageMode =='view'">
+                                    <div class="flex-shrink-0 text-center mb-2">
+                                        <img [src]="getImage('permit')" alt="" style="width: 100%;">
+
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="col-lg-6">                               
+                                <div class="mb-3">
+                                    <strong class="form-label">Tax Expiry Date: </strong>
+                                    <ng-container *ngIf="pageMode =='view'">
+                                        <span class="m-3">{{vehicle.Tax_Expiry|date}}</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="pageMode =='edit'">
+                                        <input type="text" class="form-control" id="dtpTaxExpiry"
+                                            placeholder="Tax Expiry" name="taxExp"
+                                            [(ngModel)]="vehicle.Tax_Expiry">
+                                    </ng-container>
+                                
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- end tab pane -->
+
+                    <div class="card-footer text-end p-1" *ngIf="pageMode =='edit'">
+                        <button type="button" class="btn btn-outline-primary m-1" (click)="pageMode = 'view'">
+                            Cancel</button>
+                        <button type="button" class="btn btn-primary" (click)="onSaveClick()">
+                            <i class="ri-save-line"></i>
+                            Save</button>
+                           
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end col -->
+
+</div>

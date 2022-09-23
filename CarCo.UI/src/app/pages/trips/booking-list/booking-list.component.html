@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Bookings</h4>
+
+            </div><!-- end card header -->
+            <div class="card-body pt-0">
+                <div style="margin-bottom: 15px;"></div>
+                <p-table [value]="bookings" [paginator]="true" [rows]="10">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>#</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Vehicle</th>
+                            <th>Driver</th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-trip>
+                        <tr>
+                            <td>{{trip.book.TripNumber}}</td>
+                            <td>{{trip.book.StartLocation}}</td>
+                            <td>{{trip.book.EndLocation}}</td>
+                            <td>{{trip.car.Model_Name}}</td>
+                            <td>{{trip.driver.Name}}</td>
+
+                            <td>
+                                <div class="d-flex gap-2 justify-content-end">
+                                    <div class="edit">
+                                        <button class="btn btn-sm btn-success edit-item-btn"
+                                            (click)="viewBookingDetails(trip)">View</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<p-sidebar [(visible)]="displayBookingDetails" position="right" [style]="{width:'50%'}">
+    <div *ngIf="selectedBooking">
+        <table class="table table-trip-details">
+            <tr>
+                <td><strong>Trip Number#</strong></td>
+                <td>{{selectedBooking.book.TripNumber}}</td>
+            </tr>
+            <tr>
+                <td><strong>From</strong></td>
+                <td>{{selectedBooking.book.StartLocation}}</td>
+            </tr>
+            <tr>
+                <td><strong>To</strong></td>
+                <td>{{selectedBooking.book.EndLocation}}</td>
+            </tr>
+            <tr>
+                <td><strong>Vehicle</strong></td>
+                <td>
+                    <div class="align-items-center d-flex justify-content-between">
+
+                        <span>{{selectedBooking.car.Registration_Number}}</span>
+                        <img class="img-thumbnail" [src]="getCarImage()" alt="" width="200" data-holder-rendered="true">
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Driver</strong></td>
+                <td>{{selectedBooking.driver.Name}}</td>
+            </tr>
+            <tr>
+                <td><strong>Distance</strong></td>
+                <td>{{selectedBooking.book.Distance}}</td>
+            </tr>
+            <tr>
+                <td><strong>Amount</strong></td>
+                <td>{{selectedBooking.book.Amount}}</td>
+            </tr>
+            <tr>
+                <td><strong></strong></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+</p-sidebar>

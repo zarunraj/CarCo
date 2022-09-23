@@ -1,0 +1,483 @@
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title mb-0">Add new vehicle</h4>
+        </div><!-- end card header -->
+        <div class="card-body form-steps">
+            <form action="#">
+                <div class="text-center pt-3 pb-4 mb-1">
+                    <h5>Add new vehicle</h5>
+                </div>
+                <div id="custom-progress-bar" class="progress-nav mb-4">
+                    <div class="progress" style="height: 1px;">
+                        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+
+                    <ul class="nav nav-pills progress-bar-tab custom-nav" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill active" data-progressbar="custom-progress-bar"
+                                id="pills-gen-info-tab" data-bs-toggle="pill" data-bs-target="#pills-gen-info"
+                                type="button" role="tab" aria-controls="pills-gen-info" aria-selected="true">1</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill" data-progressbar="custom-progress-bar"
+                                id="pills-info-desc-tab" data-bs-toggle="pill" data-bs-target="#pills-info-desc"
+                                type="button" role="tab" aria-controls="pills-info-desc" aria-selected="false"
+                                [disabled]="!isSaved">2</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill" data-progressbar="custom-progress-bar"
+                                id="pills-insurance-tab" data-bs-toggle="pill" data-bs-target="#pills-insurance"
+                                type="button" role="tab" aria-controls="pills-insurance" aria-selected="false"
+                                [disabled]="!isSaved">3</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill" data-progressbar="custom-progress-bar"
+                                id="pills-rc-tab" data-bs-toggle="pill" data-bs-target="#pills-rc" type="button"
+                                role="tab" aria-controls="pills-rc" aria-selected="false"
+                                [disabled]="!isSaved">4</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill" data-progressbar="custom-progress-bar"
+                                id="pills-pollution-tab" data-bs-toggle="pill" data-bs-target="#pills-pollution"
+                                type="button" role="tab" aria-controls="pills-pollution" aria-selected="false"
+                                [disabled]="!isSaved">5</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill" data-progressbar="custom-progress-bar"
+                                id="pills-permit-tab" data-bs-toggle="pill" data-bs-target="#pills-permit" type="button"
+                                role="tab" aria-controls="pills-permit" aria-selected="false"
+                                [disabled]="!isSaved">6</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill" data-progressbar="custom-progress-bar"
+                                id="pills-tax-tab" data-bs-toggle="pill" data-bs-target="#pills-tax" type="button"
+                                role="tab" aria-controls="pills-tax" aria-selected="false"
+                                [disabled]="!isSaved">7</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill" data-progressbar="custom-progress-bar" disabled
+                                id="pills-success-tab" data-bs-toggle="pill" data-bs-target="#pills-success"
+                                type="button" role="tab" aria-controls="pills-success" aria-selected="false"
+                                [disabled]="!isSaved">8</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-content">
+
+                    <div class="tab-pane fade show active" id="pills-gen-info" role="tabpanel"
+                        aria-labelledby="pills-gen-info-tab">
+                        <div>
+                            <div class="mb-4">
+                                <div>
+                                    <h5 class="mb-1">General Information</h5>
+                                    <p class="text-muted">Fill all Information as below</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="gen-info-reg-input">Registration Number</label>
+                                        <input type="text" class="form-control" id="gen-info-reg-input"
+                                            placeholder="Enter Registration Number" name="regno"
+                                            [(ngModel)]="vehicle.Registration_Number">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="gen-info-modelname-input">Model Name</label>
+                                        <input type="text" class="form-control" id="gen-info-modelname-input"
+                                            placeholder="Enter Model Name" [(ngModel)]="vehicle.Model_Name"
+                                            name="modelname">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="gen-info-brand-input">Brand</label>
+                                        <input type="text" class="form-control" id="gen-info-brand-input"
+                                            placeholder="Enter Brand" name="brand" [(ngModel)]="vehicle.Brand">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="gen-info-modelname-input">Color</label>
+                                        <select class="form-control" [(ngModel)]="vehicle.Color" name="color">
+                                            <option value="Black">Black</option>
+                                            <option value="White">White</option>
+                                            <option value="Red">Red</option>
+                                            <option value="Silver">Silver</option>
+                                            <option value="Blue">Blue</option>
+                                            <option value="Brown">Brown</option>
+                                            <option value="Orange">Orange</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="gen-info-noOfPass-input">No of Passenger</label>
+                                        <input type="text" class="form-control" id="gen-info-noOfPass-input"
+                                            placeholder="Enter No of passengers" name="noofpass"
+                                            [(ngModel)]="vehicle.No_of_Pas">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="gen-info-modelname-input">Fuel Type</label>
+                                        <select class="form-control" [(ngModel)]="vehicle.Fueltype" name="fueltype">
+                                            <option value="Petrol">Petrol</option>
+                                            <option value="Diesel">Diesel</option>
+                                            <option value="Gas">Gas</option>
+                                            <option value="Electric">Electric</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  -->
+
+                        </div>
+                        <div class="d-flex align-items-start gap-3 mt-4">
+                            <button type="button" class="btn btn-success btn-label right ms-auto nexttab"
+                                id="btnSaveandContinue" (click)="onbtnSaveandContinueClick()"
+                                [ngClass]="{'d-none': isSaved}">
+                                <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
+                                Save and continue</button>
+                            <button type="button" class="btn btn-success btn-label right ms-auto nexttab d-none"
+                                id="btnContinue" data-nexttab="pills-info-desc-tab" [ngClass]="{'d-none': !isSaved}">
+                                <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
+                                Continue</button>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+
+
+                    <!-- Vehicle Tab Start -->
+                    <div class="tab-pane fade" id="pills-info-desc" role="tabpanel"
+                        aria-labelledby="pills-info-desc-tab">
+                        <div>
+                            <div class="mb-4">
+                                <div>
+                                    <h5 class="mb-1">Add Vehicle Image</h5>
+                                    <p class="text-muted"></p>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <div class="profile-user position-relative d-inline-block mx-auto mb-2">
+                                    <img src="assets/images/users/user-dummy-img.jpg"
+                                        class="rounded-circle avatar-lg img-thumbnail user-profile-image"
+                                        alt="user-profile-image">
+                                    <div class="avatar-xs p-0 profile-photo-edit">
+                                        <input id="profile-img-file-input" type="file" class="profile-img-file-input"
+                                            accept="image/png, image/jpeg" (change)="onVehiclePhotoChange($event)">
+                                        <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
+                                            <span class="avatar-title rounded-circle bg-light text-body">
+                                                <i class="ri-camera-fill"></i>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <h5 class="fs-14">Add Vehicle Image</h5>
+
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-start gap-3 mt-4">
+                            <button type="button" class="btn btn-link text-decoration-none btn-label previestab"
+                                data-previous="pills-gen-info-tab"><i
+                                    class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to
+                                General</button>
+                            <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab"
+                                data-nexttab="pills-insurance-tab"><i
+                                    class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Submit</button>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+                    <!-- Vehicle Tab End -->
+
+
+
+                    <!-- Insurance Tab Start -->
+                    <div class="tab-pane fade" id="pills-insurance" role="tabpanel"
+                        aria-labelledby="pills-insurance-tab">
+                        <div>
+                            <div class="text-center">
+                                <div class="profile-user position-relative d-inline-block mx-auto mb-2">
+                                    <img src="assets/images/users/user-dummy-img.jpg"
+                                        class="rounded-circle avatar-lg img-thumbnail user-profile-image"
+                                        alt="user-profile-image">
+                                    <div class="avatar-xs p-0 profile-photo-edit">
+                                        <input id="insurance-img-file-input" type="file" class="profile-img-file-input"
+                                            accept="image/png, image/jpeg" (change)="onInsurancePhotoChange($event)">
+                                        <label for="insurance-img-file-input" class="profile-photo-edit avatar-xs">
+                                            <span class="avatar-title rounded-circle bg-light text-body">
+                                                <i class="ri-camera-fill"></i>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <h5 class="fs-14">Add Insurance Certificate</h5>
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Insurance Expiry Date</label>
+                                        <input type="text" class="form-control" id="dtpInsuranceExpiry"
+                                            placeholder="Insurance Expiry" name="insExp"
+                                            [(ngModel)]="vehicle.Insurance_Expiry">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--  -->
+
+                        <div class="d-flex align-items-start gap-3 mt-4">
+                            <button type="button" class="btn btn-link text-decoration-none btn-label previestab"
+                                data-previous="pills-info-desc-tab"><i
+                                    class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to
+                                Image</button>
+                            <button type="button" class="btn btn-success btn-label right ms-auto nexttab"
+                                data-nexttab="pills-rc-tab" [ngClass]="{'d-none': !isSaved}"
+                                (click)="updateVehicle()">
+                                <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
+                                Continue</button>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+                    <!-- Insurance Tab End -->
+
+
+
+                    <!-- RC Book Tab Start -->
+                    <div class="tab-pane fade" id="pills-rc" role="tabpanel" aria-labelledby="pills-rc-tab">
+
+
+                        <div>
+                            <div class="text-center">
+                                <div class="profile-user position-relative d-inline-block mx-auto mb-2">
+                                    <img src="assets/images/users/user-dummy-img.jpg"
+                                        class="rounded-circle avatar-lg img-thumbnail user-profile-image"
+                                        alt="user-profile-image">
+                                    <div class="avatar-xs p-0 profile-photo-edit">
+                                        <input id="rc-file-input" type="file" class="profile-img-file-input"
+                                            accept="image/png, image/jpeg" (change)="onRCPhotoChange($event)">
+                                        <label for="rc-file-input" class="profile-photo-edit avatar-xs">
+                                            <span class="avatar-title rounded-circle bg-light text-body">
+                                                <i class="ri-camera-fill"></i>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <h5 class="fs-14">Add RC Certificate</h5>
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">RC Expiry Date</label>
+                                        <input type="text" class="form-control" id="dtpRCExpiry"
+                                            placeholder="Insurance Expiry" name="insExp"
+                                            [(ngModel)]="vehicle.RC_Book_ValidityDate">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -->
+
+                        <div class="d-flex align-items-start gap-3 mt-4">
+                            <button type="button" class="btn btn-link text-decoration-none btn-label previestab"
+                                data-previous="pills-insurance-tab"><i
+                                    class="ri-arrow-left-line label-icon align-middle fs-16 me-2">
+                                </i> Back to Insurance</button>
+                            <button type="button" class="btn btn-success btn-label right ms-auto nexttab"
+                                data-nexttab="pills-pollution-tab" [ngClass]="{'d-none': !isSaved}"
+                                (click)="updateVehicle()">
+                                <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
+                                Continue</button>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+                    <!-- RC Book Tab End -->
+
+
+
+                    <!-- Pollution Tab Start -->
+                    <div class="tab-pane fade" id="pills-pollution" role="tabpanel"
+                        aria-labelledby="pills-pollution-tab">
+
+
+                        <div>
+                            <div class="text-center">
+                                <div class="profile-user position-relative d-inline-block mx-auto mb-2">
+                                    <img src="assets/images/users/user-dummy-img.jpg"
+                                        class="rounded-circle avatar-lg img-thumbnail user-profile-image"
+                                        alt="user-profile-image">
+                                    <div class="avatar-xs p-0 profile-photo-edit">
+                                        <input id="pollution-file-input" type="file" class="profile-img-file-input"
+                                            accept="image/png, image/jpeg" (change)="onPollutionPhotoChange($event)">
+                                        <label for="pollution-file-input" class="profile-photo-edit avatar-xs">
+                                            <span class="avatar-title rounded-circle bg-light text-body">
+                                                <i class="ri-camera-fill"></i>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <h5 class="fs-14">Add Pollution Certificate</h5>
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Pollution Expiry Date</label>
+                                        <input type="text" class="form-control" id="dtpPollutionExpiry"
+                                            placeholder="Pollution Expiry" name="pollutionExp"
+                                            [(ngModel)]="vehicle.Pollution_Expiry">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -->
+
+                        <div class="d-flex align-items-start gap-3 mt-4">
+                            <button type="button" class="btn btn-link text-decoration-none btn-label previestab"
+                            data-previous="pills-rc-tab"><i
+                                class="ri-arrow-left-line label-icon align-middle fs-16 me-2">
+                            </i> Back to RC book</button>
+                            <button type="button" class="btn btn-success btn-label right ms-auto nexttab"
+                                data-nexttab="pills-permit-tab" [ngClass]="{'d-none': !isSaved}"
+                                (click)="updateVehicle()">
+                                <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
+                                Continue</button>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+                    <!-- Pollution Tab End -->
+
+
+                    <!-- Permit Tab Start -->
+                    <div class="tab-pane fade" id="pills-permit" role="tabpanel" aria-labelledby="pills-permit-tab">
+
+
+                        <div>
+                            <div class="text-center">
+                                <div class="profile-user position-relative d-inline-block mx-auto mb-2">
+                                    <img src="assets/images/users/user-dummy-img.jpg"
+                                        class="rounded-circle avatar-lg img-thumbnail user-profile-image"
+                                        alt="user-profile-image">
+                                    <div class="avatar-xs p-0 profile-photo-edit">
+                                        <input id="permit-file-input" type="file" class="profile-img-file-input"
+                                            accept="image/png, image/jpeg" (change)="onPermitPhotoChange($event)">
+                                        <label for="permit-file-input" class="profile-photo-edit avatar-xs">
+                                            <span class="avatar-title rounded-circle bg-light text-body">
+                                                <i class="ri-camera-fill"></i>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <h5 class="fs-14">Add Permit Certificate</h5>
+
+                            </div>
+
+                        </div>
+                        <!--  -->
+
+                        <div class="d-flex align-items-start gap-3 mt-4">
+                            <button type="button" class="btn btn-link text-decoration-none btn-label previestab"
+                            data-previous="pills-pollution-tab"><i
+                                class="ri-arrow-left-line label-icon align-middle fs-16 me-2">
+                            </i> Back to Pollution</button>
+                            <button type="button" class="btn btn-success btn-label right ms-auto nexttab"
+                                id="btnContinue" data-nexttab="pills-tax-tab" [ngClass]="{'d-none': !isSaved}"
+                                (click)="updateVehicle()">
+                                <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
+                                Continue</button>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+                    <!-- Permit Tab End -->
+
+
+                    <!-- Tax Tab Start -->
+                    <div class="tab-pane fade" id="pills-tax" role="tabpanel" aria-labelledby="pills-tax-tab">
+
+
+                        <div>
+                            <div class="text-center">
+                                <div class="profile-user position-relative d-inline-block mx-auto mb-2">
+                                    <img src="assets/images/users/user-dummy-img.jpg"
+                                        class="rounded-circle avatar-lg img-thumbnail user-profile-image"
+                                        alt="user-profile-image">
+                                    <div class="avatar-xs p-0 profile-photo-edit">
+                                        <input id="tax-file-input" type="file" class="profile-img-file-input"
+                                            accept="image/png, image/jpeg" (change)="onTaxPhotoChange($event)">
+                                        <label for="tax-file-input" class="profile-photo-edit avatar-xs">
+                                            <span class="avatar-title rounded-circle bg-light text-body">
+                                                <i class="ri-camera-fill"></i>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <h5 class="fs-14">Add Tax Certificate</h5>
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Tax Expiry Date</label>
+                                        <input type="text" class="form-control" id="dtpTaxExpiry"
+                                            placeholder="Tax Expiry" name="taxExp" [(ngModel)]="vehicle.Tax_Expiry">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -->
+
+                        <div class="d-flex align-items-start gap-3 mt-4">
+                            <button type="button" class="btn btn-link text-decoration-none btn-label previestab"
+                            data-previous="pills-permit-tab"><i
+                                class="ri-arrow-left-line label-icon align-middle fs-16 me-2">
+                            </i> Back to Permit</button>
+                            <button type="button" class="btn btn-success btn-label right ms-auto nexttab"
+                                data-nexttab="pills-success-tab" [ngClass]="{'d-none': !isSaved}"
+                                (click)="updateVehicle()">
+                                <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
+                                Continue</button>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+                    <!-- Tax Tab End -->
+
+
+                    <!-- Success Tab Start -->
+                    <div class="tab-pane fade" id="pills-success" role="tabpanel" aria-labelledby="pills-success-tab">
+                        <div>
+                            <div class="text-center">
+                                <div class="mb-4">
+                                </div>
+                                <h5>Well Done !</h5>
+                                <p class="text-muted">You have Successfully Added new vehicle</p>
+                                <p><a href="/#/vehicles">Back to vehicle list</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end tab pane -->
+                    <!-- Success Tab End -->
+                </div>
+                <!-- end tab content -->
+            </form>
+        </div>
+        <!-- end card body -->
+    </div>
+    <!-- end card -->
+</div>
