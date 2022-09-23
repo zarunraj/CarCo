@@ -26,22 +26,10 @@ namespace WebAngularRAC.Controllers
         }
 
         // GET: api/values
-        [HttpGet]
-        public VehicleTypeTB[] Get()
-        {
-            try
-            {
-                var results = _DatabaseContext.VehicleTypeTB.ToList();
-                return results.ToArray();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+       
         // GET: api/values
         [HttpGet]
-        public VehicleTypeTB[] GetVehicleTypes()
+        public VehicleTypeTB[] Get()
         {
             try
             {
@@ -59,7 +47,7 @@ namespace WebAngularRAC.Controllers
         {
             try
             {
-                var vehicleType = _DatabaseContext.VehicleTypeTB.FirstOrDefault(x => x.ID == id);
+                var vehicleType = _DatabaseContext.VehicleTypeTB.FirstOrDefault(x => x.ID == id && x.IsActive );
                 if (vehicleType == null)
                 {
                     return BadRequest();

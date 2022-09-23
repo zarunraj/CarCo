@@ -38,7 +38,9 @@ import { EmergencyListComponent } from './pages/emergency/emergency-list/emergen
 import { EmergencyDetailsComponent } from './pages/emergency/emergency-details/emergency-details.component'
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { OffersListComponent } from './pages/offers/offers-list/offers-list.component';
-import { OfferDetailsComponent } from './pages/offers/offer-details/offer-details.component';
+import { OfferDetailsComponent } from './pages/offers/offer-details/offer-details.component'; 
+import { VehicleTypesComponent } from './pages/vehicle-types/VehicleTypes-List/vehicle-types.component';
+import { VehicleTypeDetailsComponent } from './pages/vehicle-types/vehicle-type-details/vehicle-type-details.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { OfferDetailsComponent } from './pages/offers/offer-details/offer-detail
     EmergencyDetailsComponent,
     OffersListComponent,
     OfferDetailsComponent,
+    VehicleTypesComponent,
+    VehicleTypeDetailsComponent,
 
   ],
   imports: [

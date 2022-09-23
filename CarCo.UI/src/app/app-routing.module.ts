@@ -19,7 +19,9 @@ import { ReviewComponent } from './pages/review/review/review.component'
 import { EmergencyListComponent } from './pages/emergency/emergency-list/emergency-list.component'
 import { EmergencyDetailsComponent } from './pages/emergency/emergency-details/emergency-details.component'
 import { OffersListComponent } from './pages/offers/offers-list/offers-list.component'
-import { OfferDetailsComponent } from './pages/offers/offer-details/offer-details.component'
+import { OfferDetailsComponent } from './pages/offers/offer-details/offer-details.component' 
+import { VehicleTypesComponent } from './pages/vehicle-types/VehicleTypes-List/vehicle-types.component'
+import { VehicleTypeDetailsComponent } from './pages/vehicle-types/vehicle-type-details/vehicle-type-details.component'
 
 const routes: Routes = [
   {
@@ -90,6 +92,13 @@ const routes: Routes = [
       {
         path: 'offers/:id',
         component: OfferDetailsComponent,
+      },
+      {
+        path: 'vehicletypes',
+        component: VehicleTypesComponent,
+      },{
+        path: 'vehicletypes/:id',
+        component: VehicleTypeDetailsComponent,
       },
     ],
   },

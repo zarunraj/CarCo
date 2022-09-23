@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Vehicle Types</h4>
+                <div class="flex-shrink-0">
+                    <button type="button" class="btn btn-sm btn-info edit-item-btn"
+                        (click)="navigateToAddVehicleType(0)">+Add New Vehicle Type</button>
+                </div>
+            </div><!-- end card header -->
+            <div class="card-body pt-0">
+                <div id="customerList">
+
+
+                    <div class="table-responsive table-card mt-0 mb-1">
+                         <p-table #dtvehicleTypes [value]="vehicleTypes" [paginator]="true" [rows]="10"
+                        [globalFilterFields]="['Name','CostPerKM']">
+                            <ng-template pTemplate="caption">
+                                <div class="flex">
+                                    <span class="p-input-icon-left ml-auto">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text" (input)="dtvehicleTypes.filterGlobal($any($event.target).value, 'contains')" placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th class="sort" pSortableColumn="Name">Vehicle Type <p-sortIcon field="Name"></p-sortIcon></th>
+                                    <th class="sort" pSortableColumn="CostPerKM">Rate <p-sortIcon field="CostPerKM"></p-sortIcon></th> 
+                                    <th class="sort text-end">Action</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-vehicleType>
+                                <tr  >
+                                    
+                                    <td class="email">{{vehicleType.Name}}</td>
+                                    <td class="phone">{{vehicleType.CostPerKM}}<span
+                                            class="badge badge-soft-success">per km</span></td>
+                                   
+                                    <td>
+                                        <div class="d-flex gap-2 justify-content-end">
+                                            <div class="edit">
+                                                <button class="btn btn-sm btn-success edit-item-btn"
+                                                    (click)="navigateToAddVehicleType(vehicleType.ID)">Edit</button>
+                                            </div>
+                                            <div class="remove">
+                                                <button class="btn btn-sm btn-danger remove-item-btn"
+                                                    (click)="onRemoveVehicleTypeClick(vehicleType.ID)">Remove</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table> 
+             
+                        
+                    </div>
+
+
+                </div>
+            </div><!-- end card -->
+        </div><!-- end card -->
+    </div>
+</div>

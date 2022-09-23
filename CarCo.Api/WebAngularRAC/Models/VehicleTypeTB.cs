@@ -17,6 +17,9 @@ namespace WebAngularRAC.Models
         public DateTime CreatedOn { get; set; }
         public bool IsActive { get; set; }
 
+        [Required]
+        public int CostPerKM { get; set; }
+
         [ForeignKey("VehicleTypeID")]
         public ICollection<KMCostTB> KMRates { get; set; }
 

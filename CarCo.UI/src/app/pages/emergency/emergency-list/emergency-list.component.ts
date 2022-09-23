@@ -9,18 +9,18 @@ import { EmergencyService } from 'src/app/shared/services/rest_api/emergency.ser
 })
 export class EmergencyListComponent implements OnInit {
   emergencies: any = []
-  constructor(private service: EmergencyService, private route:Router) {}
+  constructor(private service: EmergencyService, private route: Router) { }
 
   ngOnInit(): void {
     this.loadList();
   }
   loadList() {
-  this.service. getAll().subscribe({
-    next:(data)=>this.emergencies = data
-  }) 
+    this.service.getAll().subscribe({
+      next: (data) => this.emergencies = data
+    })
   }
 
   navigateToEmeDetails(id: number) {
-this.route.navigateByUrl(`/emergency/${id}`)
+    this.route.navigateByUrl(`/emergency/${id}`)
   }
 }
