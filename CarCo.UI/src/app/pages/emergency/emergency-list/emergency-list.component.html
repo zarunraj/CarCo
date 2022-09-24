@@ -29,12 +29,16 @@
                                 <td>{{eme.LatitudeandLongitude}}</td>
                                 <td>{{eme.ContactNumber}}</td>
                                 <td>{{eme.Type}}</td>
-                                <td class="d-flex justify-content-end">
+                                <td class="d-flex gap-2 justify-content-end">
                                     <div class="edit">
                                         <button class="btn btn-sm btn-success edit-item-btn"
                                             (click)="navigateToEmeDetails(eme.ID)">
                                             <i class="ri-pages-line"></i>
                                             View</button>
+                                    </div>
+                                    <div class="remove">
+                                        <button class="btn btn-sm btn-danger remove-item-btn"
+                                            (click)="onRemoveClick(eme.ID)">Remove</button>
                                     </div>
                                 </td>
                             </tr>
