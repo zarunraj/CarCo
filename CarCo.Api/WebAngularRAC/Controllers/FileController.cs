@@ -52,5 +52,23 @@ namespace WebAngularRAC.Controllers
 
             return new PhysicalFileResult(imagePath, "image/jpeg");
         }
+
+        [Route("offers/{id}")]
+        public async Task<IActionResult> GetOfferImage([FromRoute] int id)
+        {
+            try
+            {
+                var offer = await databaseContext.OffersTB.FindAsync(id);
+                var pathDB = string.IsNullOrEmpty(offer.Image) ? "images\\no-image.jpg" : offer.Image;
+                var imagePath = Path.Combine(hostingEnvironment.WebRootPath, pathDB);
+
+                return new PhysicalFileResult(imagePath, "image/jpeg");
+            }
+            catch (System.Exception)
+            {
+
+                return NotFound();
+            }
+        }
     }
 }

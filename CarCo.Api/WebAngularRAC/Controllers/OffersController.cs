@@ -91,11 +91,12 @@ namespace WebAngularRAC.Controllers
 
 
         [HttpPost]
-        public IActionResult EnableorDisable(int ID,bool isEnable)
+        [Route("{id}/status")]
+        public IActionResult UpdateStatus([FromRoute]int id,bool isEnable)
         {
             try
             {
-                var offer = _DatabaseContext.OffersTB.FirstOrDefault(x => x.ID == ID);
+                var offer = _DatabaseContext.OffersTB.FirstOrDefault(x => x.ID == id);
                 if (offer != null)
                 {
                     offer.IsActive = isEnable;
@@ -140,7 +141,7 @@ namespace WebAngularRAC.Controllers
                 offer.Name = offerstb.Name;
                 offer.Details = offerstb.Details;
                 offer.Percentage = offerstb.Percentage;
-
+                offer.IsActive = offerstb.IsActive;
                 _DatabaseContext.SaveChanges();
                 return Ok(offer);
             }
@@ -219,5 +220,7 @@ namespace WebAngularRAC.Controllers
                 return BadRequest();
             }
         }
+   
+    
     }
 }

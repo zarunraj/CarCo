@@ -5,4 +5,5 @@ export class Offer{
     Details:string;
     StartDate:Date;
     EndDate:Date;
+    IsActive:boolean;
 }

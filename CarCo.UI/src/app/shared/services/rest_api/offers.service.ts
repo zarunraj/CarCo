@@ -43,6 +43,8 @@ export class OffersService  extends ApiService {
     return this.post(`api/offers/${id}/uploadImage`, formData)
   }
 
+  
+
   deleteOffer(id: number) {
     const serviceUrl = `api/offer/${id}`
     return this.delete(serviceUrl)

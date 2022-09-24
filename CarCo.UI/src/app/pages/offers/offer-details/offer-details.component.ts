@@ -14,14 +14,15 @@ import { environment } from 'src/environments/environment';
 })
 export class OfferDetailsComponent implements OnInit {
 
+
   offerId: number
   offer: Offer
   mode = 'view'
   drivingLicenseUrl = ''
   constructor(
     private offerService: OffersService,
-    private route: ActivatedRoute,  private messageService: MessageService,
-  ) {}
+    private route: ActivatedRoute, private messageService: MessageService,
+  ) { }
 
   ngOnInit(): void {
     this.offer = new Offer()
@@ -110,8 +111,13 @@ export class OfferDetailsComponent implements OnInit {
           summary: 'Success',
           detail: 'Uploaded successfully',
         })
-       },
+      },
     })
- 
+
+  }
+
+  getImage() {
+    const serviceUrl = `${environment.apiUrl}/api/files/offers/${this.offerId}?key=${Math.random()}`
+    return serviceUrl
   }
 }
