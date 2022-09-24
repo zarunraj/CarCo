@@ -33,7 +33,42 @@ namespace WebAngularRAC.Controllers
         {
             try
             {
-                var ListofCars = _DatabaseContext.CarTB.Select(i=>new CarTB {Brand=i.Brand,Color=i.Color,DriverID=i.DriverID,DriverName=i.DriverTB.Name,Fueltype=i.Fueltype,Image=i.Image,Insurance_Expiry=i.Insurance_Expiry,Insurance_Image=i.Insurance_Image,IsActive=i.IsActive,C_Id=i.C_Id,CreatedOn=i.CreatedOn,IsAvailableForRide=i.IsAvailableForRide,Model_Name=i.Model_Name,IsDocumentVerifired=i.IsDocumentVerifired,No_of_Pas=i.No_of_Pas,Permit_Image=i.Permit_Image,Pollution_Certificate=i.Pollution_Certificate,Pollution_Expiry=i.Pollution_Expiry,RC_Book_Image=i.RC_Book_Image,RC_Book_ValidityDate=i.RC_Book_ValidityDate,Registration_Number=i.Registration_Number,Tax_Expiry=i.Tax_Expiry,Tax_Image=i.Tax_Image,UserID=i.UserID,VehicleTypeID=i.VehicleTypeID,VehicleType=i.VehicleTypeTB.Name }).ToList().OrderByDescending(x => x.C_Id);
+
+                var ListofCars = (from car in _DatabaseContext.CarTB
+                                  join driver in _DatabaseContext.DriverTB
+                                     on car.DriverID equals driver.ID
+                                  join vtype in _DatabaseContext.VehicleTypeTB
+                                 on car.VehicleTypeID equals vtype.ID
+                                  select new CarTB
+                                  {
+                                      Brand = car.Brand,
+                                      Color = car.Color,
+                                      DriverID = car.DriverID,
+                                      DriverName = driver.Name,
+                                      Fueltype = car.Fueltype,
+                                      Image = car.Image,
+                                      Insurance_Expiry = car.Insurance_Expiry,
+                                      Insurance_Image = car.Insurance_Image,
+                                      IsActive = car.IsActive,
+                                      C_Id = car.C_Id,
+                                      CreatedOn = car.CreatedOn,
+                                      IsAvailableForRide = car.IsAvailableForRide,
+                                      Model_Name = car.Model_Name,
+                                      IsDocumentVerifired = car.IsDocumentVerifired,
+                                      No_of_Pas = car.No_of_Pas,
+                                      Permit_Image = car.Permit_Image,
+                                      Pollution_Certificate = car.Pollution_Certificate,
+                                      Pollution_Expiry = car.Pollution_Expiry,
+                                      RC_Book_Image = car.RC_Book_Image,
+                                      RC_Book_ValidityDate = car.RC_Book_ValidityDate,
+                                      Registration_Number = car.Registration_Number,
+                                      Tax_Expiry = car.Tax_Expiry,
+                                      Tax_Image = car.Tax_Image,
+                                      UserID = car.UserID,
+                                      VehicleTypeID = car.VehicleTypeID,
+                                      VehicleType = vtype.Name
+                                  }).ToList();
+
                 return ListofCars.ToArray();
             }
             catch (Exception)
@@ -49,9 +84,42 @@ namespace WebAngularRAC.Controllers
         {
             try
             {
-                var output = (from Cars in _DatabaseContext.CarTB
-                              where Cars.C_Id == id
-                              select Cars).SingleOrDefault();
+
+                var output = (from car in _DatabaseContext.CarTB
+                              join driver in _DatabaseContext.DriverTB
+                                 on car.DriverID equals driver.ID
+                              join vtype in _DatabaseContext.VehicleTypeTB
+                             on car.VehicleTypeID equals vtype.ID
+                              where car.C_Id == id
+                              select new CarTB
+                              {
+                                  Brand = car.Brand,
+                                  Color = car.Color,
+                                  DriverID = car.DriverID,
+                                  DriverName = driver.Name,
+                                  Fueltype = car.Fueltype,
+                                  Image = car.Image,
+                                  Insurance_Expiry = car.Insurance_Expiry,
+                                  Insurance_Image = car.Insurance_Image,
+                                  IsActive = car.IsActive,
+                                  C_Id = car.C_Id,
+                                  CreatedOn = car.CreatedOn,
+                                  IsAvailableForRide = car.IsAvailableForRide,
+                                  Model_Name = car.Model_Name,
+                                  IsDocumentVerifired = car.IsDocumentVerifired,
+                                  No_of_Pas = car.No_of_Pas,
+                                  Permit_Image = car.Permit_Image,
+                                  Pollution_Certificate = car.Pollution_Certificate,
+                                  Pollution_Expiry = car.Pollution_Expiry,
+                                  RC_Book_Image = car.RC_Book_Image,
+                                  RC_Book_ValidityDate = car.RC_Book_ValidityDate,
+                                  Registration_Number = car.Registration_Number,
+                                  Tax_Expiry = car.Tax_Expiry,
+                                  Tax_Image = car.Tax_Image,
+                                  UserID = car.UserID,
+                                  VehicleTypeID = car.VehicleTypeID,
+                                  VehicleType = vtype.Name
+                              }).OrderByDescending(r => r.C_Id).FirstOrDefault();
 
                 return output;
             }

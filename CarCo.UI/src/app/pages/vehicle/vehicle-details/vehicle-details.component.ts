@@ -1,8 +1,13 @@
 import { AfterContentInit, Component, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import flatpickr from 'flatpickr'
+import { MessageService } from 'primeng/api'
 import { switchMap, of } from 'rxjs'
+import { Driver } from 'src/app/shared/models/driver'
+import { VehicleType } from 'src/app/shared/models/vehicleType'
 import { CarsService } from 'src/app/shared/services/rest_api/cars.service'
+import { DriversService } from 'src/app/shared/services/rest_api/drivers.service'
+import { VehicleTypeService } from 'src/app/shared/services/rest_api/vehicle-type.service'
 
 @Component({
   selector: 'app-vehicle-details',
@@ -19,16 +24,40 @@ export class VehicleDetailsComponent implements OnInit, AfterContentInit {
   rcPhoto: any
   pollutionPhoto: any
   permitPhoto: any
-  taxPhoto: any
+  taxPhoto: any;
+
+  drivers: Driver[]
+  vehicleTypes: VehicleType[]
   constructor(
     private route: ActivatedRoute,
     private carsService: CarsService,
-  ) {}
-  ngAfterContentInit(): void {}
+    private driverService: DriversService,
+    private messageService: MessageService,
+    private vehicleTypeService: VehicleTypeService
+  ) { }
+  ngAfterContentInit(): void { }
 
   ngOnInit(): void {
     this.getVehicleId(() => {
+      this.loadDrivers();
+      this.loadVehicleTypes();
       this.loadVehicleDetails()
+    })
+  }
+
+  loadDrivers() {
+    this.driverService.getDrivers().subscribe({
+      next: (data) => {
+        this.drivers = data;
+      }
+    })
+  }
+
+  loadVehicleTypes() {
+    this.vehicleTypeService.getAll().subscribe({
+      next: (data) => {
+        this.vehicleTypes = data;
+      }
     })
   }
 
@@ -71,7 +100,12 @@ export class VehicleDetailsComponent implements OnInit, AfterContentInit {
       .uploadImage(this.vehiclePhoto[0], this.vehicle.C_Id, 'car')
       .subscribe({
         next: (data) => {
-          alert('uploaded vehicle photo')
+         
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'image updated successfully',
+          })
         },
       })
   }
@@ -82,7 +116,12 @@ export class VehicleDetailsComponent implements OnInit, AfterContentInit {
       .uploadImage(this.insurancePhoto[0], this.vehicle.C_Id, 'insurance')
       .subscribe({
         next: (data) => {
-          alert('uploaded insurance photo')
+         
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'image updated successfully',
+          })
         },
       })
   }
@@ -92,7 +131,12 @@ export class VehicleDetailsComponent implements OnInit, AfterContentInit {
       .uploadImage(this.rcPhoto[0], this.vehicle.C_Id, 'rcbook')
       .subscribe({
         next: (data) => {
-          alert('uploaded RC photo')
+          
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'image updated successfully',
+          })
         },
       })
   }
@@ -103,6 +147,11 @@ export class VehicleDetailsComponent implements OnInit, AfterContentInit {
       .subscribe({
         next: (data) => {
           console.log('uploaded pollution photo')
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'image updated successfully',
+          })
         },
       })
   }
@@ -114,6 +163,11 @@ export class VehicleDetailsComponent implements OnInit, AfterContentInit {
       .subscribe({
         next: (data) => {
           console.log('uploaded permit photo')
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'image updated successfully',
+          })
         },
       })
   }
@@ -125,6 +179,11 @@ export class VehicleDetailsComponent implements OnInit, AfterContentInit {
       .subscribe({
         next: (data) => {
           console.log('uploaded permit photo')
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'image updated successfully',
+          })
         },
       })
   }
@@ -142,8 +201,12 @@ export class VehicleDetailsComponent implements OnInit, AfterContentInit {
 
   onSaveClick() {
     this.carsService.updateCar(this.vehicle.C_Id, this.vehicle).subscribe({
-      next: (data) => {
-        alert('updated successfully!')
+      next: (data) => { 
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Saved successfully',
+        })
         this.pageMode = 'view'
       },
     })

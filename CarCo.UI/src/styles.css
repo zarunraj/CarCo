@@ -2,3 +2,9 @@
 .p-component{
     font-size: 12px;
 }
+
+select.form-control {
+    -moz-appearance:auto; /* Firefox */
+    -webkit-appearance:auto; /* Safari and Chrome */
+    appearance:auto;
+}

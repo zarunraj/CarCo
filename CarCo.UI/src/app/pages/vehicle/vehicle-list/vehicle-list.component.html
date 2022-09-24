@@ -29,6 +29,8 @@
                                     <th class="sort" pSortableColumn="Brand">Brand <p-sortIcon field="Brand"></p-sortIcon></th>
                                     <th class="sort" pSortableColumn="Model_Name">Model <p-sortIcon field="Model_Name"></p-sortIcon></th>
                                     <th class="sort" pSortableColumn="Color">Color <p-sortIcon field="Color"></p-sortIcon></th>
+                                    <th class="sort" pSortableColumn="VehicleTypeID">Type <p-sortIcon field="VehicleTypeID"></p-sortIcon></th>
+                                    <th class="sort" >Driver</th>
                                     <th class="sort" >Status</th>
                                     <th class="sort text-end">Action</th>
                                 </tr>
@@ -43,6 +45,8 @@
                                     <td class="email">{{vehicle.Brand}}</td>
                                     <td class="phone">{{vehicle.Model_Name}}</td>
                                     <td class="date">{{vehicle.Color}}</td>
+                                    <td>{{vehicle.VehicleType}}</td>
+                                    <td>{{vehicle.DriverName}}</td>
                                     <td class="status"><span
                                             class="badge badge-soft-success text-uppercase">Active</span></td>
                                     <td>

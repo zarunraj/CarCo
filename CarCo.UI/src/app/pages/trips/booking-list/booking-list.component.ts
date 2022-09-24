@@ -32,6 +32,6 @@ export class BookingListComponent implements OnInit {
   }
 
   getCarImage(){
-    return this.carService.getImage(this.selectedBooking.car.C_Id, 'car')
+    return this.carService.getImage(this.selectedBooking.C_Id, 'car')
   }
 }

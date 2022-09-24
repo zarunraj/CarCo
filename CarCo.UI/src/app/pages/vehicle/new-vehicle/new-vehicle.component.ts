@@ -4,6 +4,10 @@ import { CarsService } from 'src/app/shared/services/rest_api/cars.service'
 
 import flatpickr from 'flatpickr'
 import { MessageService } from 'primeng/api'
+import { Driver } from 'src/app/shared/models/driver'
+import { VehicleType } from 'src/app/shared/models/vehicleType'
+import { VehicleTypeService } from 'src/app/shared/services/rest_api/vehicle-type.service'
+import { DriversService } from 'src/app/shared/services/rest_api/drivers.service'
 
 @Component({
   selector: 'app-new-vehicle',
@@ -20,7 +24,12 @@ export class NewVehicleComponent implements OnInit, AfterContentInit {
   permitPhoto: any
   taxPhoto: any
 
-  constructor(private carsService: CarsService,private messageService: MessageService) {}
+  drivers: Driver[]
+  vehicleTypes: VehicleType[]
+  
+  constructor(private carsService: CarsService, private driverService: DriversService,
+    private messageService: MessageService,
+    private vehicleTypeService: VehicleTypeService) {}
 
   ngAfterContentInit(): void {
     document.querySelectorAll('.form-steps').forEach(function (n) {
@@ -106,7 +115,27 @@ export class NewVehicleComponent implements OnInit, AfterContentInit {
     })
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadDrivers();
+    this.loadVehicleTypes();
+  }
+
+  
+  loadDrivers() {
+    this.driverService.getDrivers().subscribe({
+      next: (data) => {
+        this.drivers = data;
+      }
+    })
+  }
+
+  loadVehicleTypes() {
+    this.vehicleTypeService.getAll().subscribe({
+      next: (data) => {
+        this.vehicleTypes = data;
+      }
+    })
+  }
 
   onbtnSaveandContinueClick() {
     console.log(this.vehicle)

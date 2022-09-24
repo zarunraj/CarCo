@@ -13,6 +13,7 @@ using WebAngularRAC.Filters;
 namespace WebAngularRAC.Controllers
 {
     [TypeFilter(typeof(APIAdminAuthorizeAttribute))]
+    [Route("api/cars")]
     public class AddCarsPhotoController : Controller
     {
 
@@ -27,6 +28,7 @@ namespace WebAngularRAC.Controllers
 
 
         [HttpPost]
+        [Route("photos")]
         public async Task<IActionResult> UploadFiles([FromHeader] ReceiverClass ReceiverClass)
         {
             try

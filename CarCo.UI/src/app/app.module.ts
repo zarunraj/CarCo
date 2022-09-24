@@ -42,6 +42,7 @@ import { OfferDetailsComponent } from './pages/offers/offer-details/offer-detail
 import { VehicleTypesComponent } from './pages/vehicle-types/VehicleTypes-List/vehicle-types.component';
 import { VehicleTypeDetailsComponent } from './pages/vehicle-types/vehicle-type-details/vehicle-type-details.component';
 import { TooltipModule } from 'primeng/tooltip';
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { TooltipModule } from 'primeng/tooltip';
     ToastModule,
     InputTextModule,
     ConfirmDialogModule,
-    TooltipModule
+    TooltipModule,
+    DropdownModule
   ],
   providers: [AuthGuard,AuthAdminGuard, MessageService, ConfirmationService],
   bootstrap: [AppComponent]

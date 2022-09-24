@@ -216,6 +216,38 @@
                                             </ng-container>
                                         </td>
                                     </tr>
+
+                                    <!-- ----------- -->
+                                    <tr>
+                                        <td><strong>Vehicle Type</strong></td>
+                                        <td>
+                                            <ng-container *ngIf="pageMode =='edit'">
+                                                <select class="form-control" [(ngModel)]="vehicle.VehicleTypeID"
+                                                    name="VehicleType">
+                                                    <option *ngFor="let c of vehicleTypes" [value]="c.ID">{{c.Name}}
+                                                    </option>
+                                                </select>
+                                            </ng-container>
+                                            <ng-container *ngIf="pageMode =='view'">
+                                                <span>{{vehicle.VehicleType}}</span>
+                                            </ng-container>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Driver</strong></td>
+                                        <td>
+                                            <ng-container *ngIf="pageMode =='edit'">
+
+                                                <select class="form-control" [(ngModel)]="vehicle.DriverID"
+                                                    name="driver">
+                                                    <option *ngFor="let c of drivers" [value]="c.ID">{{c.Name}}</option>
+                                                </select>
+                                            </ng-container>
+                                            <ng-container *ngIf="pageMode =='view'">
+                                                <span>{{vehicle.DriverName}}</span>
+                                            </ng-container>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td></td>
                                     </tr>
@@ -248,7 +280,7 @@
                                     </ngx-dropzone>
                                 </ng-container>
                                 <ng-container *ngIf="pageMode =='view'">
-                                    <div class="flex-shrink-0 text-center mb-2">
+                                    <div class="flex-shrink-0 text-center mb-2 border">
                                         <img [src]="getImage('insurance')" alt="" style="width: 100%;">
 
                                     </div>
@@ -293,13 +325,13 @@
                                     </ngx-dropzone>
                                 </ng-container>
                                 <ng-container *ngIf="pageMode =='view'">
-                                    <div class="flex-shrink-0 text-center mb-2">
+                                    <div class="flex-shrink-0 text-center mb-2 border">
                                         <img [src]="getImage('rcbook')" alt="" style="width: 100%;">
 
                                     </div>
                                 </ng-container>
                             </div>
-                            
+
                             <div class="col-lg-6">
 
                                 <div class="mb-3">
@@ -312,7 +344,7 @@
                                             placeholder="RC Book Expiry" name="rcExp"
                                             [(ngModel)]="vehicle.RC_Book_ValidityDate">
                                     </div>
-                                
+
                                 </div>
                             </div>
                         </div>
@@ -339,7 +371,7 @@
                                     </ngx-dropzone>
                                 </ng-container>
                                 <ng-container *ngIf="pageMode =='view'">
-                                    <div class="flex-shrink-0 text-center mb-2">
+                                    <div class="flex-shrink-0 text-center mb-2 border">
                                         <img [src]="getImage('pollution')" alt="" style="width: 100%;">
 
                                     </div>
@@ -356,7 +388,7 @@
                                             placeholder="Pollution Expiry" name="rcExp"
                                             [(ngModel)]="vehicle.Pollution_Expiry">
                                     </div>
-                                
+
                                 </div>
                             </div>
                         </div>
@@ -383,7 +415,7 @@
                                     </ngx-dropzone>
                                 </ng-container>
                                 <ng-container *ngIf="pageMode =='view'">
-                                    <div class="flex-shrink-0 text-center mb-2">
+                                    <div class="flex-shrink-0 text-center mb-2 border">
                                         <img [src]="getImage('permit')" alt="" style="width: 100%;">
 
                                     </div>
@@ -413,13 +445,13 @@
                                     </ngx-dropzone>
                                 </ng-container>
                                 <ng-container *ngIf="pageMode =='view'">
-                                    <div class="flex-shrink-0 text-center mb-2">
+                                    <div class="flex-shrink-0 text-center mb-2 border">
                                         <img [src]="getImage('permit')" alt="" style="width: 100%;">
 
                                     </div>
                                 </ng-container>
                             </div>
-                            <div class="col-lg-6">                               
+                            <div class="col-lg-6">
                                 <div class="mb-3">
                                     <strong class="form-label">Tax Expiry Date:{{pageMode}} </strong>
                                     <ng-container *ngIf="pageMode =='view'">
@@ -427,10 +459,9 @@
                                     </ng-container>
                                     <div *ngIf="pageMode =='edit'">
                                         <input type="text" class="form-control" id="dtpTaxExpiry"
-                                            placeholder="Tax Expiry" name="taxExp"
-                                            [(ngModel)]="vehicle.Tax_Expiry">
+                                            placeholder="Tax Expiry" name="taxExp" [(ngModel)]="vehicle.Tax_Expiry">
                                     </div>
-                                
+
                                 </div>
                             </div>
                         </div>
@@ -444,7 +475,7 @@
                         <button type="button" class="btn btn-primary" (click)="onSaveClick()">
                             <i class="ri-save-line"></i>
                             Save</button>
-                           
+
                     </div>
                 </div>
             </div>

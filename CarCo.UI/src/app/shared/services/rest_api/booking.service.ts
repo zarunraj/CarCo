@@ -15,7 +15,7 @@ export class BookingService extends ApiService {
   }
 
   getBookings() {
-    const serviceUrl = `api/booking`
+    const serviceUrl = `api/AllBookingList`
     return this.get(serviceUrl)
   }
 }

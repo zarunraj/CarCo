@@ -26,20 +26,30 @@ namespace WebAngularRAC.Controllers
             try
             {
                 var ListofBooking = (from book in _DatabaseContext.BookingTB
-                                     select new BookingTB {
+                                     join driver in _DatabaseContext.DriverTB
+                                     on book.DriverID equals driver.ID
+                                     join cus in _DatabaseContext.CustomerTB
+                                    on book.CustomerID equals cus.ID
+                                     join car in _DatabaseContext.CarTB
+                                    on book.C_Id equals car.C_Id
+                                     select new BookingTB
+                                     {
                                          Amount = book.Amount,
                                          CustomerID = book.CustomerID,
                                          BookingID = book.BookingID,
-                                         Carname = book.Carname,
+                                         Carname = car.Registration_Number,
                                          Distance = book.Distance,
                                          CreatedOn = book.CreatedOn,
                                          C_Id = book.C_Id,
                                          DriverID = book.DriverID,
                                          StartLocation = book.StartLocation,
                                          EndLocation = book.EndLocation,
-                                         ModelName = book.ModelName,
+                                         ModelName = car.Model_Name,
                                          TripNumber = book.TripNumber,
                                          PaymentStatus = book.PaymentStatus,
+                                         DriverName = driver.Name,
+                                         CustomerName = cus.Name,
+                                         VehicleType = _DatabaseContext.VehicleTypeTB.FirstOrDefault(x => x.ID == car.VehicleTypeID).Name,
                                          Status = book.PaymentStatus == "D" ? "Completed" : book.PaymentStatus == "C" ? "Cancel" : book.PaymentStatus == "P" ? "Pending" : "Unknown"
                                      }).ToList();
 
