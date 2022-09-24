@@ -27,7 +27,9 @@
 
                             <span *ngIf="mode=='view'">{{emergency.LatitudeandLongitude}}</span>
                             <ng-container *ngIf="mode=='edit'">
-                                <input class="form-control" type="text" [(ngModel)]="emergency.LatitudeandLongitude">
+                                <input class="form-control" type="text" 
+                                [(ngModel)]="emergency.LatitudeandLongitude"
+                                placeholder="Enter longitude and latitude. ex: 11.258753, 75.780411">
                             </ng-container>
                         </td>
                     </tr>
