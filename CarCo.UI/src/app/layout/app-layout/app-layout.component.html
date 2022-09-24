@@ -229,6 +229,12 @@
                             <i class="ri-government-fill"></i> <span data-key="t-vehicle">Dashboard</span>
                         </a>
                     </li>
+                    
+                    <li class="nav-item" [routerLinkActive]="['active']">
+                        <a class="nav-link menu-link" [routerLink]="['vehicletypes']">
+                            <i class="ri-taxi-fill"></i> <span data-key="t-vehicle">Vehicle Types</span>
+                        </a>
+                    </li>
 
                     <li class="nav-item" [routerLinkActive]="['active']">
                         <a class="nav-link menu-link" [routerLink]="['vehicles']">
@@ -264,12 +270,7 @@
                         <a class="nav-link menu-link" [routerLink]="['offers']">
                             <i class="ri-shopping-cart-line"></i> <span data-key="t-vehicle">Offers</span>
                         </a>
-                    </li>
-                    <li class="nav-item" [routerLinkActive]="['active']">
-                        <a class="nav-link menu-link" [routerLink]="['vehicletypes']">
-                            <i class="ri-taxi-fill"></i> <span data-key="t-vehicle">Vehicle Types</span>
-                        </a>
-                    </li>
+                    </li>                    
                     <!-- end Dashboard Menu -->
                 </ul>
             </div>
