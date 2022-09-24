@@ -12,12 +12,22 @@
 
                 <table class="table" *ngIf="emergency">
                     <tr>
+                        <td><strong>Name</strong></td>
+                        <td>
+
+                            <span *ngIf="mode=='view'">{{emergency.Name}}</span>
+                            <ng-container *ngIf="mode=='edit'">
+                                <input class="form-control" type="text" [(ngModel)]="emergency.Name">
+                            </ng-container>
+                        </td>
+                    </tr>
+                    <tr>
                         <td><strong>Location</strong></td>
                         <td>
 
-                            <span *ngIf="mode=='view'">{{emergency.Location}}</span>
+                            <span *ngIf="mode=='view'">{{emergency.LatitudeandLongitude}}</span>
                             <ng-container *ngIf="mode=='edit'">
-                                <input class="form-control" type="text" [(ngModel)]="emergency.Location">
+                                <input class="form-control" type="text" [(ngModel)]="emergency.LatitudeandLongitude">
                             </ng-container>
                         </td>
                     </tr>
@@ -29,14 +39,7 @@
                             </ng-container>
                         </td>
                     </tr>
-                    <tr>
-                        <td><strong>Type</strong></td>
-                        <td><span *ngIf="mode=='view'">{{emergency.Type}}</span>
-                            <ng-container *ngIf="mode=='edit'">
-                                <input class="form-control" type="text" [(ngModel)]="emergency.Type">
-                            </ng-container>
-                        </td>
-                    </tr>
+                    
                       
                     <tr></tr>
                 </table>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute, ParamMap } from '@angular/router'
+import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { MessageService } from 'primeng/api'
 import { switchMap, of } from 'rxjs'
 import { Emergency } from 'src/app/shared/models/Emergency'
@@ -19,6 +19,7 @@ export class EmergencyDetailsComponent implements OnInit {
     private service: EmergencyService,
     private route: ActivatedRoute,
     private messageService: MessageService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -81,6 +82,7 @@ export class EmergencyDetailsComponent implements OnInit {
             summary: 'Success',
             detail: 'Saved successfully',
           })
+          this.router.navigateByUrl(`/emergency/${this.emergencyId}`)
         },
         error: (err) => {
           this.messageService.add({severity:'error', summary:'Error', detail:'Error while saving'});
