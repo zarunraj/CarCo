@@ -1,9 +1,12 @@
 
-*.bin
-CarCo.Api/.vs/**
+**/bin/**
+**/.vs/**
+**/obj/**
+**/wwwroot/**
 CarCo.Api/WebAngularRAC/bin/**
 CarCo.Api/WebAngularRAC/obj/**
 CarCo.Api/WebAngularRAC/wwwroot/**
 CarCo.UI/node_modules/**
 CarCo.UI/.angular/**
 CarCo.UI/dist/**
+CarCo.Api.Core/CarCo.Api.Core/bin/Debug/net6.0/CarCo.Api.Core.exe
