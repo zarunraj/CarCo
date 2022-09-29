@@ -46,7 +46,7 @@ export class CarsService extends ApiService {
   }
 
   getImage(id: number, type: string) {
-    const serviceUrl = `${environment.apiUrl}/api/files/cars/${id}?type=${type}&key=${Math.random()}`
+    const serviceUrl = `${environment.apiUrl}api/files/cars/${id}?type=${type}&key=${Math.random()}`
     return serviceUrl
   }
 

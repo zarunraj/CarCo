@@ -24,7 +24,7 @@ export class AuthenticationService {
   public Login(loginModel: any): Observable<any> {
     const headers = { 'Content-Type': 'application/json' }
     return this.httpClient.post(
-      environment.apiUrl + '/api/ValidateLoginUser',
+      environment.apiUrl + 'api/ValidateLoginUser',
       loginModel,
       { headers },
     )

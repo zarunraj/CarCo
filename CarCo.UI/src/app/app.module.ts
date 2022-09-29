@@ -1,7 +1,7 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,11 +19,11 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NewVehicleComponent } from './pages/vehicle/new-vehicle/new-vehicle.component';
 import { CustomerListComponent } from './pages/customers/customer-list/customer-list.component';
 
-import {TableModule} from 'primeng/table';
-import {SidebarModule} from 'primeng/sidebar';
-import {ToastModule} from 'primeng/toast';
+import { TableModule } from 'primeng/table';
+import { SidebarModule } from 'primeng/sidebar';
+import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 import { CustomerDetailsComponent } from './pages/customers/customer-details/customer-details.component';
@@ -32,17 +32,18 @@ import { DriverDetailsComponent } from './pages/drivers/driver-details/driver-de
 import { BookingListComponent } from './pages/trips/booking-list/booking-list.component';
 import { BookingDetailsComponent } from './pages/trips/booking-details/booking-details.component';
 
-import{BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReviewComponent } from './pages/review/review/review.component';
 import { EmergencyListComponent } from './pages/emergency/emergency-list/emergency-list.component';
 import { EmergencyDetailsComponent } from './pages/emergency/emergency-details/emergency-details.component'
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { OffersListComponent } from './pages/offers/offers-list/offers-list.component';
-import { OfferDetailsComponent } from './pages/offers/offer-details/offer-details.component'; 
+import { OfferDetailsComponent } from './pages/offers/offer-details/offer-details.component';
 import { VehicleTypesComponent } from './pages/vehicle-types/VehicleTypes-List/vehicle-types.component';
 import { VehicleTypeDetailsComponent } from './pages/vehicle-types/vehicle-type-details/vehicle-type-details.component';
 import { TooltipModule } from 'primeng/tooltip';
-import {DropdownModule} from 'primeng/dropdown';
+import { DropdownModule } from 'primeng/dropdown';
+import { HttpInterceptorService } from './shared/services/http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,10 @@ import {DropdownModule} from 'primeng/dropdown';
     TooltipModule,
     DropdownModule
   ],
-  providers: [AuthGuard,AuthAdminGuard, MessageService, ConfirmationService],
+  providers: [AuthGuard, AuthAdminGuard, MessageService, ConfirmationService,
+    {
+      provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

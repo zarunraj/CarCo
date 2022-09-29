@@ -1,37 +1,41 @@
-﻿using CarCo.Api.Core.DBcontext;
-using CarCo.Api.Core.Filters;
-using CarCo.Api.Core.Models;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using CarCo.Api.Core.DBcontext;
+using CarCo.Api.Core.Models; 
+using CarCo.Api.Core.Filters;
+using Microsoft.AspNetCore.Cors;
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CarCo.Api.Core.Controllers
 {
     [Route("api/[controller]")]
-
     [TypeFilter(typeof(APIAdminAuthorizeAttribute))]
     [EnableCors("CorsApi")]
-    public class VehicleTypeController : ControllerBase
+
+    public class KMCostController : Controller
     {
-        private readonly DatabaseContext databaseContext;
-        private readonly IWebHostEnvironment hostingEnvironment;
+        DatabaseContext _DatabaseContext;
+        private readonly IHostEnvironment _environment;
 
-        public VehicleTypeController(DatabaseContext DatabaseContext, IWebHostEnvironment hostingEnvironment)
+        public KMCostController(DatabaseContext databasecontext, IHostEnvironment hostingEnvironment)
         {
-            databaseContext = DatabaseContext;
-            this.hostingEnvironment = hostingEnvironment;
+            _DatabaseContext = databasecontext;
+            _environment = hostingEnvironment;
         }
-
-
-        // GET: api/values
 
         // GET: api/values
         [HttpGet]
-        public VehicleTypeTB[] Get()
+        public KMCostTB[] Get()
         {
             try
             {
-                var results = databaseContext.VehicleTypeTB.Where(x => x.ID != null).ToList();
+                var results = _DatabaseContext.KMCostTB.ToList();
                 return results.ToArray();
             }
             catch (Exception)
@@ -45,7 +49,7 @@ namespace CarCo.Api.Core.Controllers
         {
             try
             {
-                var vehicleType = databaseContext.VehicleTypeTB.FirstOrDefault(x => x.ID == id && x.IsActive);
+                var vehicleType = _DatabaseContext.KMCostTB.FirstOrDefault(x => x.ID == id);
                 if (vehicleType == null)
                 {
                     return BadRequest();
@@ -61,13 +65,13 @@ namespace CarCo.Api.Core.Controllers
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody] VehicleTypeTB vehicletb)
+        public IActionResult Post([FromBody] KMCostTB kmcost)
         {
             try
             {
-                var output = (from offer in databaseContext.VehicleTypeTB
-                              where offer.Name == vehicletb.Name
-                              select offer.Name).Count();
+                var output = (from km in _DatabaseContext.KMCostTB
+                              where km.VehicleTypeID == kmcost.VehicleTypeID
+                              select km.VehicleTypeID).Count();
 
                 if (output > 0)
                 {
@@ -75,11 +79,9 @@ namespace CarCo.Api.Core.Controllers
                 }
                 else
                 {
-                    vehicletb.CreatedOn = DateTime.Now;
-                    vehicletb.IsActive = true;
-                    databaseContext.Add(vehicletb);
-                    databaseContext.SaveChanges();
-                    return Ok(vehicletb);
+                    _DatabaseContext.Add(kmcost);
+                    _DatabaseContext.SaveChanges();
+                    return Ok(kmcost);
                 }
             }
             catch (Exception)
@@ -89,11 +91,11 @@ namespace CarCo.Api.Core.Controllers
             }
         }
 
-
+ 
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] VehicleTypeTB vehicletb)
+        public IActionResult Put(int id, [FromBody] KMCostTB kmcost)
         {
             try
             {
@@ -102,23 +104,23 @@ namespace CarCo.Api.Core.Controllers
                     return BadRequest();
                 }
 
-                if (vehicletb == null)
+                if (kmcost == null)
                 {
                     return BadRequest();
                 }
 
 
-                var vehicle = databaseContext.VehicleTypeTB.FirstOrDefault(x => x.ID == id);
-                if (vehicle == null)
+                var km = _DatabaseContext.KMCostTB.FirstOrDefault(x => x.ID == id);
+                if (km == null)
                 {
                     return BadRequest();
                 }
 
-                vehicle.Name = vehicletb.Name;
-                vehicle.IsActive = vehicletb.IsActive;
+                km.VehicleTypeID = kmcost.VehicleTypeID;
+                km.KMCost = kmcost.KMCost;
 
-                databaseContext.SaveChanges();
-                return Ok(vehicle);
+                _DatabaseContext.SaveChanges();
+                return Ok(km);
             }
             catch (Exception)
             {
@@ -132,15 +134,14 @@ namespace CarCo.Api.Core.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await databaseContext.VehicleTypeTB.FindAsync(id);
+            var result = await _DatabaseContext.KMCostTB.FindAsync(id);
             if (result == null)
             {
                 return NotFound();
             }
-            databaseContext.VehicleTypeTB.Remove(result);
-            await databaseContext.SaveChangesAsync();
+            _DatabaseContext.KMCostTB.Remove(result);
+            await _DatabaseContext.SaveChangesAsync();
             return Ok();
         }
-
     }
 }

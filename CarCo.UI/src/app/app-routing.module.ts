@@ -27,6 +27,7 @@ const routes: Routes = [
   {
     path: '',
     component: AppLayoutComponent,
+    canActivate:[AuthGuard],
     children: [
       {
         path: 'dashboard',

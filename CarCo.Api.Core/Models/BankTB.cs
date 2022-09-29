@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -12,6 +13,6 @@ namespace CarCo.Api.Core.Models
     {
         [Key]
         public int BankID { get; set; }
-        public string BankName { get; set; }
+        public string? BankName { get; set; }
     }
 }

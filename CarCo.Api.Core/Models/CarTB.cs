@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -12,21 +13,22 @@ namespace CarCo.Api.Core.Models
     {
         [Key]
         public int C_Id { get; set; }
-        public string Registration_Number { get; set; }
-        public string Model_Name { get; set; }
-        public string Brand { get; set; }
-        public string Color { get; set; }
+        public string? Registration_Number { get; set; }
+        public string? Model_Name { get; set; }
+        public string? Brand { get; set; }
+        public string? Color { get; set; }
         public int No_of_Pas { get; set; }
-        public string Image { get; set; }
-        public string Fueltype { get; set; }
+        public string? Image { get; set; }
+        public string? Fueltype { get; set; }
+
         public DateTime? RC_Book_ValidityDate { get; set; }
-        public string RC_Book_Image { get; set; }
-        public string Pollution_Certificate { get; set; }
+        public string? RC_Book_Image { get; set; }
+        public string? Pollution_Certificate { get; set; }
         public DateTime? Pollution_Expiry { get; set; }
-        public string Insurance_Image { get; set; }
+        public string? Insurance_Image { get; set; }
         public DateTime? Insurance_Expiry { get; set; }
-        public string Permit_Image { get; set; }
-        public string Tax_Image { get; set; }
+        public string? Permit_Image { get; set; }
+        public string? Tax_Image { get; set; }
         public DateTime? Tax_Expiry { get; set; }
         public bool IsActive { get; set; }
         public bool IsAvailableForRide { get; set; }
@@ -42,10 +44,10 @@ namespace CarCo.Api.Core.Models
         public VehicleTypeTB VehicleTypeTB { get; set; }
         public int VehicleTypeID { get; set; }
         [NotMapped]
-        public string DriverName { get; set; }
+        public string? DriverName { get; set; }
         [NotMapped]
-        public string Username { get; set; }
+        public string? Username { get; set; }
         [NotMapped]
-        public string VehicleType { get; set; }
+        public string? VehicleType { get; set; }
     }
 }
