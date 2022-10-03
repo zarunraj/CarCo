@@ -26,10 +26,10 @@ export class NewVehicleComponent implements OnInit, AfterContentInit {
 
   drivers: Driver[]
   vehicleTypes: VehicleType[]
-  
+
   constructor(private carsService: CarsService, private driverService: DriversService,
     private messageService: MessageService,
-    private vehicleTypeService: VehicleTypeService) {}
+    private vehicleTypeService: VehicleTypeService) { }
 
   ngAfterContentInit(): void {
     document.querySelectorAll('.form-steps').forEach(function (n) {
@@ -50,9 +50,9 @@ export class NewVehicleComponent implements OnInit, AfterContentInit {
           r.addEventListener('click', function () {
             for (
               var e = r.getAttribute('data-previous'),
-                t = r.closest('form').querySelectorAll('.custom-nav .done')
-                  .length,
-                o = t - 1;
+              t = r.closest('form').querySelectorAll('.custom-nav .done')
+                .length,
+              o = t - 1;
               o < t;
               o++
             )
@@ -60,7 +60,7 @@ export class NewVehicleComponent implements OnInit, AfterContentInit {
                 r
                   .closest('form')
                   .querySelectorAll('.custom-nav .done')
-                  [o].classList.remove('done')
+                [o].classList.remove('done')
             document.getElementById(e)?.click()
           })
         })
@@ -76,7 +76,7 @@ export class NewVehicleComponent implements OnInit, AfterContentInit {
               e = (r / e) * 100
               let bar = document.getElementById('custom-progress-bar')
               if (bar) {
-                ;(bar.querySelector('.progress-bar') as any).style.width =
+                ; (bar.querySelector('.progress-bar') as any).style.width =
                   e + '%'
               }
               0 < n.querySelectorAll('.custom-nav .done').length &&
@@ -92,27 +92,15 @@ export class NewVehicleComponent implements OnInit, AfterContentInit {
       })
     })
 
-    flatpickr('#dtpInsuranceExpiry', {
+    let calendarOptions = {
       altInput: true,
       altFormat: 'F j, Y',
-      dateFormat: 'Y-m-d',
-    })
-    flatpickr('#dtpRCExpiry', {
-      altInput: true,
-      altFormat: 'F j, Y',
-      dateFormat: 'Y-m-d',
-    })
-    flatpickr('#dtpPollutionExpiry', {
-      altInput: true,
-      altFormat: 'F j, Y',
-      dateFormat: 'Y-m-d',
-    })
-
-    flatpickr('#dtpTaxExpiry', {
-      altInput: true,
-      altFormat: 'F j, Y',
-      dateFormat: 'Y-m-d',
-    })
+      dateFormat: 'Y-m-d', minDate: new Date()
+    }
+    flatpickr('#dtpInsuranceExpiry', calendarOptions)
+    flatpickr('#dtpRCExpiry', calendarOptions)
+    flatpickr('#dtpPollutionExpiry', calendarOptions)
+    flatpickr('#dtpTaxExpiry', calendarOptions)
   }
 
   ngOnInit(): void {
@@ -120,7 +108,7 @@ export class NewVehicleComponent implements OnInit, AfterContentInit {
     this.loadVehicleTypes();
   }
 
-  
+
   loadDrivers() {
     this.driverService.getDrivers().subscribe({
       next: (data) => {
@@ -154,78 +142,78 @@ export class NewVehicleComponent implements OnInit, AfterContentInit {
   }
 
   onVehiclePhotoChange(event: any) {
-    this.vehicle.Image =null;
+    this.vehicle.Image = null;
     this.carsService
       .uploadImage(event.target.files[0], this.vehicle.C_Id, 'car')
       .subscribe({
-        next: (data) => { 
+        next: (data) => {
           this.vehicle = data
-          this.messageService.add({  severity: 'success',  summary: 'Success',  detail: 'Uploaded vehicle photo',  }) 
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Uploaded vehicle photo', })
         },
       })
   }
 
   onInsurancePhotoChange(event: any) {
     this.insurancePhoto = event.target.files[0]
-    this.vehicle.Insurance_Image =null;
+    this.vehicle.Insurance_Image = null;
     this.carsService
       .uploadImage(this.insurancePhoto, this.vehicle.C_Id, 'insurance')
       .subscribe({
         next: (data) => {
-          this.vehicle =data;
-          this.messageService.add({  severity: 'success',  summary: 'Success',  detail: 'Uploaded insurance photo',  }) 
-          
+          this.vehicle = data;
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Uploaded insurance photo', })
+
         },
       })
   }
   onRCPhotoChange(event: any) {
     this.rcPhoto = event.target.files[0]
-    this.vehicle.RC_Book_Image =null;
+    this.vehicle.RC_Book_Image = null;
     this.carsService
       .uploadImage(this.rcPhoto, this.vehicle.C_Id, 'rcbook')
       .subscribe({
         next: (data) => {
           this.vehicle = data
-          this.messageService.add({  severity: 'success',  summary: 'Success',  detail: 'Uploaded RC photo',  })  
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Uploaded RC photo', })
         },
       })
   }
   onPollutionPhotoChange(event: any) {
     this.pollutionPhoto = event.target.files[0]
-    this.vehicle.Pollution_Certificate =null;
+    this.vehicle.Pollution_Certificate = null;
     this.carsService
       .uploadImage(this.pollutionPhoto, this.vehicle.C_Id, 'pollution')
       .subscribe({
         next: (data) => {
           this.vehicle = data
-          this.messageService.add({  severity: 'success',  summary: 'Success',  detail: 'Uploaded pollution photo',  })  
-          
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Uploaded pollution photo', })
+
         },
       })
   }
 
   onPermitPhotoChange(event: any) {
     this.permitPhoto = event.target.files[0]
-    this.vehicle.Permit_Image =null;
+    this.vehicle.Permit_Image = null;
     this.carsService
       .uploadImage(this.permitPhoto, this.vehicle.C_Id, 'permit')
       .subscribe({
         next: (data) => {
           this.vehicle = data
-          this.messageService.add({  severity: 'success',  summary: 'Success',  detail: 'Uploaded permit photo',  })   
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Uploaded permit photo', })
         },
       })
   }
 
   onTaxPhotoChange(event: any) {
     this.taxPhoto = event.target.files[0]
-    this.vehicle.Tax_Image =null;
+    this.vehicle.Tax_Image = null;
     this.carsService
       .uploadImage(this.taxPhoto, this.vehicle.C_Id, 'tax')
       .subscribe({
         next: (data) => {
           this.vehicle = data
-          this.messageService.add({  severity: 'success',  summary: 'Success',  detail: 'Uploaded Tax photo',  })    
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Uploaded Tax photo', })
         },
       })
   }

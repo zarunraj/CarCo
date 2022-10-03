@@ -62,7 +62,7 @@ export class VehicleDetailsComponent implements OnInit, AfterContentInit {
   }
 
   bindControls() {
-    const options = { altInput: true, altFormat: 'F j, Y', dateFormat: 'Y-m-d' }
+    const options = { altInput: true, altFormat: 'F j, Y', dateFormat: 'Y-m-d', minDate:new Date() }
     flatpickr('#dtpInsuranceExpiry', options)
     flatpickr('#dtpRCExpiry', options)
     flatpickr('#dtpPollutionExpiry', options)

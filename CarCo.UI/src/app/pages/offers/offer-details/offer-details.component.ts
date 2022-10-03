@@ -42,6 +42,7 @@ export class OfferDetailsComponent implements OnInit {
         altInput: true,
         altFormat: 'F j, Y',
         dateFormat: 'Y-m-d',
+        minDate:new Date()
       }
       flatpickr('#dtpStartDate', options)
       flatpickr('#dtpEndDate', options)

@@ -42,6 +42,7 @@ export class DriverDetailsComponent implements OnInit {
         altInput: true,
         altFormat: 'F j, Y',
         dateFormat: 'Y-m-d',
+        minDate:new Date()
       }
       flatpickr('#dtpExpiry', options)
     }, 500)
