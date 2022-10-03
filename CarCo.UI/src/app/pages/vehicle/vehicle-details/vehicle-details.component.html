@@ -39,7 +39,7 @@
                             </div>
                             <div class="col-md-auto">
                                 <div class="hstack gap-1 flex-wrap">
-                                    <button class="btn btn-sm btn-soft-danger edit-item-btn"
+                                    <button class="btn btn-sm btn-soft-danger edit-item-btn" *ngIf="pageMode =='view'"
                                         (click)="switchToEditMode()"><i class="ri-pencil-line"></i> Edit</button>
 
                                 </div>
