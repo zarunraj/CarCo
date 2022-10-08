@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { VehicleType } from 'src/app/shared/models/vehicleType';
 import { VehicleTypeService } from 'src/app/shared/services/rest_api/vehicle-type.service';
 
@@ -14,7 +14,8 @@ export class VehicleTypesComponent implements OnInit {
 
   constructor(private service: VehicleTypeService,
     private confirmationService: ConfirmationService,
-    private route: Router) { }
+    private route: Router
+    , private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.loadList()
@@ -38,10 +39,21 @@ export class VehicleTypesComponent implements OnInit {
       accept: () => {
         this.service.deleteVehicleType(id).subscribe({
           next: (result) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: "Deleted",
+            })
             this.loadList()
           },
           error: (err) => {
-            console.log(err)
+          
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: "Can't delete",
+              })
+           
           },
         })
       }

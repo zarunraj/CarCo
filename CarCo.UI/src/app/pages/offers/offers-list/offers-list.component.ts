@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { OffersService } from 'src/app/shared/services/rest_api/offers.service';
 
 @Component({
@@ -9,10 +10,13 @@ import { OffersService } from 'src/app/shared/services/rest_api/offers.service';
 })
 export class OffersListComponent implements OnInit {
 
- 
+
   offers: any
 
-  constructor(private offersService: OffersService, private router: Router) {}
+  constructor(private offersService: OffersService,
+    private confirmationService: ConfirmationService,
+    private router: Router,
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.loadOffers()
@@ -29,12 +33,20 @@ export class OffersListComponent implements OnInit {
     this.router.navigateByUrl('offers/' + id)
   }
   onRemoveOfferClick(id: number) {
-    if (confirm('are you sure ?')) {
-      this.offersService.deleteOffer(id).subscribe({
-        next: (data) => {
-          this.loadOffers();
-        },
-      })
-    }
+    this.confirmationService.confirm({
+      message: 'Are you sure?',
+      accept: () => {
+        this.offersService.deleteOffer(id).subscribe({
+          next: (data) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: "Deleted",
+            })
+            this.loadOffers();
+          },
+        })
+      }
+    });
   }
 }

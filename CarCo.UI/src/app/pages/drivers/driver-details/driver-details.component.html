@@ -10,54 +10,30 @@
             </div><!-- end card header -->
             <div class="card-body pt-0">
                 <div class="row">
-
-                    <div class="col-3" *ngIf="driver">
-                        <div class="bg-white mt-3">
-                            <img src="{{driverProfilePhoto}}" alt="" style="align-self:baseline ;width:100%">
-                        </div>
-
-                        <div class=" p-0 profile-photo-edit" *ngIf="mode=='edit' && driverId>0">
-                            <input id="profile-img-file-input" type="file" style="display: none;"
-                                accept="image/png, image/jpeg" (change)="onDriverPhotoChange($event)">
-                            <label for="profile-img-file-input" class="profile-photo-edit">
-                                <span class="text-decoration-underline nav-link text-body">
-                                    Update profile photo
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-9">
-
+                    <div class="col-8">
                         <table class="table" *ngIf="driver">
                             <tr>
                                 <td><strong>Name</strong></td>
-                                <td>
+                                <td class="p-1">
                                     <span *ngIf="mode=='view'">{{driver.Name}}</span>
                                     <ng-container *ngIf="mode=='edit'">
                                         <input class="form-control" type="text" [(ngModel)]="driver.Name" required
                                             #name="ngModel">
-                                        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
-                                            <div *ngIf="name.errors?.['required']">
-                                                Name is required.
-                                            </div>
-                                        </div>
                                     </ng-container>
                                 </td>
-                                <td>
-
-                                </td>
+                                <td> </td>
                             </tr>
                             <tr>
                                 <td><strong>Phone</strong></td>
-                                <td><span *ngIf="mode=='view'">{{driver.Phone}}</span>
+                                <td class="p-1"><span *ngIf="mode=='view'">{{driver.Phone}}</span>
                                     <ng-container *ngIf="mode=='edit'">
-                                        <input class="form-control" type="text" [(ngModel)]="driver.Phone">
+                                        <input class="form-control" type="number" [(ngModel)]="driver.Phone">
                                     </ng-container>
                                 </td>
                             </tr>
                             <tr>
                                 <td><strong>Email</strong></td>
-                                <td><span *ngIf="mode=='view'">{{driver.Email}}</span>
+                                <td class="p-1"><span *ngIf="mode=='view'">{{driver.Email}}</span>
                                     <ng-container *ngIf="mode=='edit'">
                                         <input class="form-control" type="email" [(ngModel)]="driver.Email">
                                     </ng-container>
@@ -65,7 +41,7 @@
                             </tr>
                             <tr>
                                 <td><strong>Address</strong></td>
-                                <td><span *ngIf="mode=='view'">{{driver.Address}}</span>
+                                <td class="p-1"><span *ngIf="mode=='view'">{{driver.Address}}</span>
                                     <ng-container *ngIf="mode=='edit'">
                                         <input class="form-control" type="text" [(ngModel)]="driver.Address">
                                     </ng-container>
@@ -73,12 +49,12 @@
                             </tr>
                             <tr *ngIf="mode=='edit' && driver.ID>0">
                                 <td><strong>Driving License</strong></td>
-                                <td><input class="form-control" type="file" id="formFile"
+                                <td class="p-1"><input class="form-control" type="file" id="formFile"
                                         (change)="onDrivingLicensePhotoChange($event)"></td>
                             </tr>
                             <tr>
                                 <td><strong>Driving License No</strong></td>
-                                <td><span *ngIf="mode=='view'">{{driver.DrivingLicenseNumber}}</span>
+                                <td class="p-1"><span *ngIf="mode=='view'">{{driver.DrivingLicenseNumber}}</span>
                                     <ng-container *ngIf="mode=='edit'">
                                         <input class="form-control" type="text"
                                             [(ngModel)]="driver.DrivingLicenseNumber">
@@ -87,29 +63,15 @@
                             </tr>
                             <tr>
                                 <td><strong>License Expiry</strong></td>
-                                <td><span *ngIf="mode=='view'">{{driver.DrivingLicenseExpiryDate|date}}</span>
-                                    <div *ngIf="mode=='edit'">
+                                <td class="p-1"><span
+                                        *ngIf="mode=='view'">{{driver.DrivingLicenseExpiryDate|date}}</span>
+                                    <div *ngIf="mode=='edit'" class="p-0">
                                         <input id="dtpExpiry" class="form-control" type="text"
                                             [(ngModel)]="driver.DrivingLicenseExpiryDate">
                                     </div>
                                 </td>
                             </tr>
-                            <tr *ngIf="false">
-                                <td><strong></strong></td>
-                                <td><span *ngIf="mode=='view'">{{driver.IsActive ? 'Active':'Not active'}}</span>
-                                    <ng-container *ngIf="mode=='edit'">
-                                        <div>
 
-                                            <div class="form-check form-switch form-switch-md form-switch-success mb-3"
-                                                dir="ltr">
-                                                <input type="checkbox" class="form-check-input" id="isDriverActive"
-                                                    [(ngModel)]="driver.IsActive">
-                                                <label class="form-check-label" for="isDriverActive">Active</label>
-                                            </div>
-                                        </div>
-                                    </ng-container>
-                                </td>
-                            </tr>
                             <tr *ngIf="driver.DrivingLicenseImage">
                                 <td></td>
                                 <td>
@@ -121,6 +83,49 @@
                             </tr>
                             <tr></tr>
                         </table>
+                    </div>
+                     
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="text-center">
+                                <div class="bg-white mt-3">
+                                    <img src="{{driverProfilePhoto}}" alt="" style="align-self:baseline ;width:50%; border:dotted 1px #DDD">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="text-center">
+                                <span>Update Driver Image</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="text-center">
+                                <div class="bg-white mt-3">
+                                    <img src="{{driverProfilePhoto}}" alt="" style="align-self:baseline ;width:50%; border:dotted 1px #DDD">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="text-center">
+                                <span>Update Driver License</span>
+                            </div>
+                        </div>
+
+
+
+
+
+                       
+                        <!-- <ngx-dropzone (change)="onDriverPhotoChange($event)" *ngIf="mode=='edit'">
+                            <ngx-dropzone-label>Drop photo here</ngx-dropzone-label>
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
+                                [removable]="true" *ngFor="let f of driverProfileImages" [file]="f"
+                                >
+
+                            </ngx-dropzone-image-preview>
+                        </ngx-dropzone> -->
                     </div>
                 </div>
                 <div class="d-flex justify-content-center" *ngIf="mode=='view'">

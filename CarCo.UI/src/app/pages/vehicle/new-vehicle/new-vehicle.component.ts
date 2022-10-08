@@ -16,7 +16,7 @@ import { DriversService } from 'src/app/shared/services/rest_api/drivers.service
 })
 export class NewVehicleComponent implements OnInit, AfterContentInit {
   isSaved = false
-  vehicle: any = new vehicle()
+  vehicle: vehicle = new vehicle()
   vehiclePhoto: any
   insurancePhoto: any
   rcPhoto: any
@@ -125,8 +125,63 @@ export class NewVehicleComponent implements OnInit, AfterContentInit {
     })
   }
 
+  validateTab1() {
+    let flag = true;
+    if (!this.vehicle.Registration_Number) {
+      flag = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Registration Number is required'
+      })
+    }
+    if (!this.vehicle.Model_Name) {
+      flag = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Model name is required'
+      })
+    }
+
+    if (!this.vehicle.Brand) {
+      flag = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Brand is required'
+      })
+    }
+    if (!this.vehicle.Fueltype) {
+      flag = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Fuel type is required'
+      })
+    }
+    if (!this.vehicle.No_of_Pas) {
+      flag = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'No. of passengers is required'
+      })
+    }
+    if (!this.vehicle.VehicleTypeID) {
+      flag = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Vehicle type is required'
+      })
+    }
+    if (!this.vehicle.DriverID) {
+      flag = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Driver is required'
+      })
+    }
+    return flag;
+  }
   onbtnSaveandContinueClick() {
-    console.log(this.vehicle)
+    if (!this.validateTab1())
+      return;
     this.carsService.addCar(this.vehicle).subscribe({
       next: (data) => {
         this.vehicle = data
@@ -136,7 +191,11 @@ export class NewVehicleComponent implements OnInit, AfterContentInit {
         }, 500)
       },
       error: (err) => {
-        alert('error')
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: "Something went wrong! Please try again.",
+        })
       },
     })
   }

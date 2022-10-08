@@ -216,7 +216,8 @@
                                     class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to
                                 General</button>
                             <button type="button" class="btn btn-success btn-label right ms-auto nexttab nexttab"
-                                data-nexttab="pills-insurance-tab"><i
+                                data-nexttab="pills-insurance-tab"
+                                [disabled]="!vehicle.Image"><i
                                     class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Continue</button>
                         </div>
                     </div>
@@ -269,7 +270,9 @@
                                     class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Back to
                                 Image</button>
                             <button type="button" class="btn btn-success btn-label right ms-auto nexttab"
-                                data-nexttab="pills-rc-tab" [ngClass]="{'d-none': !isSaved}" (click)="updateVehicle()">
+                                data-nexttab="pills-rc-tab" [ngClass]="{'d-none': !isSaved}"
+                                [disabled]="!vehicle.Insurance_Image || !vehicle.Insurance_Expiry"
+                                (click)="updateVehicle()">
                                 <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
                                 Continue</button>
                         </div>
@@ -324,6 +327,7 @@
                                 </i> Back to Insurance</button>
                             <button type="button" class="btn btn-success btn-label right ms-auto nexttab"
                                 data-nexttab="pills-pollution-tab" [ngClass]="{'d-none': !isSaved}"
+                                [disabled]="!vehicle.RC_Book_Image || !vehicle.RC_Book_ValidityDate"
                                 (click)="updateVehicle()">
                                 <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
                                 Continue</button>
@@ -381,6 +385,7 @@
                                 </i> Back to RC book</button>
                             <button type="button" class="btn btn-success btn-label right ms-auto nexttab"
                                 data-nexttab="pills-permit-tab" [ngClass]="{'d-none': !isSaved}"
+                                [disabled]="!vehicle.Pollution_Certificate || !vehicle.Pollution_Expiry"
                                 (click)="updateVehicle()">
                                 <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
                                 Continue</button>
@@ -425,7 +430,7 @@
                                 </i> Back to Pollution</button>
                             <button type="button" class="btn btn-success btn-label right ms-auto nexttab"
                                 id="btnContinue" data-nexttab="pills-tax-tab" [ngClass]="{'d-none': !isSaved}"
-                                (click)="updateVehicle()">
+                                (click)="updateVehicle()" [disabled]="!vehicle.Permit_Image">
                                 <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
                                 Continue</button>
                         </div>
@@ -478,7 +483,8 @@
                                 </i> Back to Permit</button>
                             <button type="button" class="btn btn-success btn-label right ms-auto nexttab"
                                 data-nexttab="pills-success-tab" [ngClass]="{'d-none': !isSaved}"
-                                (click)="updateVehicle()">
+                                (click)="updateVehicle()"
+                                [disabled]="!vehicle.Tax_Image || !vehicle.Tax_Expiry">
                                 <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
                                 Continue</button>
                         </div>

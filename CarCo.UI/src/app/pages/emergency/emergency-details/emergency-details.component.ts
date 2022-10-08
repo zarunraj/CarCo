@@ -69,7 +69,7 @@ export class EmergencyDetailsComponent implements OnInit {
             detail: 'Saved successfully',
           })
           this.mode = 'view'
-
+          this.router.navigateByUrl(`/emergency`)
         },
       })
     } else {
@@ -82,7 +82,7 @@ export class EmergencyDetailsComponent implements OnInit {
             summary: 'Success',
             detail: 'Saved successfully',
           })
-          this.router.navigateByUrl(`/emergency/${this.emergencyId}`)
+          this.router.navigateByUrl(`/emergency`)
         },
         error: (err) => {
           this.messageService.add({severity:'error', summary:'Error', detail:'Error while saving'});

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
+import { ConfirmationService, MessageService } from 'primeng/api'
 import { DriversService } from 'src/app/shared/services/rest_api/drivers.service'
 
 @Component({
@@ -10,7 +11,9 @@ import { DriversService } from 'src/app/shared/services/rest_api/drivers.service
 export class DriversListComponent implements OnInit {
   drivers: any
 
-  constructor(private driverService: DriversService, private router: Router) {}
+  constructor(private driverService: DriversService, private router: Router
+    ,private confirmationService: ConfirmationService,
+    private messageService:MessageService) { }
 
   ngOnInit(): void {
     this.loadDrivers()
@@ -18,8 +21,8 @@ export class DriversListComponent implements OnInit {
   loadDrivers() {
     this.driverService.getDrivers().subscribe({
       next: (data) => {
-        this.drivers = data.map((x:any) => {
-          return { ...x, isLicenseExpiry: new Date(x.DrivingLicenseExpiryDate) <(new Date()) }
+        this.drivers = data.map((x: any) => {
+          return { ...x, isLicenseExpiry: new Date(x.DrivingLicenseExpiryDate) < (new Date()) }
         })
       },
     })
@@ -29,12 +32,20 @@ export class DriversListComponent implements OnInit {
     this.router.navigateByUrl('drivers/' + id)
   }
   onRemoveDriverClick(id: number) {
-    if (confirm('are you sure ?')) {
-      this.driverService.deleteDriver(id).subscribe({
-        next: (data) => {
-          this.loadDrivers()
-        },
-      })
-    }
+    this.confirmationService.confirm({
+      message: 'Are you sure?',
+      accept: () => {
+        this.driverService.deleteDriver(id).subscribe({
+          next: (data) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: "Deleted",
+            })
+            this.loadDrivers()
+          },
+        })
+      }
+    });
   }
 }

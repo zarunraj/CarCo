@@ -19,7 +19,7 @@ import { ReviewComponent } from './pages/review/review/review.component'
 import { EmergencyListComponent } from './pages/emergency/emergency-list/emergency-list.component'
 import { EmergencyDetailsComponent } from './pages/emergency/emergency-details/emergency-details.component'
 import { OffersListComponent } from './pages/offers/offers-list/offers-list.component'
-import { OfferDetailsComponent } from './pages/offers/offer-details/offer-details.component' 
+import { OfferDetailsComponent } from './pages/offers/offer-details/offer-details.component'
 import { VehicleTypesComponent } from './pages/vehicle-types/VehicleTypes-List/vehicle-types.component'
 import { VehicleTypeDetailsComponent } from './pages/vehicle-types/vehicle-type-details/vehicle-type-details.component'
 
@@ -27,8 +27,9 @@ const routes: Routes = [
   {
     path: '',
     component: AppLayoutComponent,
-    canActivate:[AuthGuard],
+    canActivate: [AuthGuard],
     children: [
+      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
       {
         path: 'dashboard',
         component: DashboardComponent, //,canActivate:[AuthAdminGuard]
@@ -85,7 +86,7 @@ const routes: Routes = [
         path: 'emergency/:id',
         component: EmergencyDetailsComponent,
       },
-      
+
       {
         path: 'offers',
         component: OffersListComponent,
@@ -97,7 +98,7 @@ const routes: Routes = [
       {
         path: 'vehicletypes',
         component: VehicleTypesComponent,
-      },{
+      }, {
         path: 'vehicletypes/:id',
         component: VehicleTypeDetailsComponent,
       },
@@ -113,4 +114,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

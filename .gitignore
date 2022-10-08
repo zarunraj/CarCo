@@ -10,3 +10,4 @@ CarCo.UI/node_modules/**
 CarCo.UI/.angular/**
 CarCo.UI/dist/**
 CarCo.Api.Core/CarCo.Api.Core/bin/Debug/net6.0/CarCo.Api.Core.exe
+CarCo.Api.Core/docs/**

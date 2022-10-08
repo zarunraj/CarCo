@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import flatpickr from 'flatpickr';
 import { MessageService } from 'primeng/api';
 import { switchMap, of } from 'rxjs';
@@ -22,6 +22,7 @@ export class OfferDetailsComponent implements OnInit {
   constructor(
     private offerService: OffersService,
     private route: ActivatedRoute, private messageService: MessageService,
+    private router :Router
   ) { }
 
   ngOnInit(): void {
@@ -85,7 +86,14 @@ export class OfferDetailsComponent implements OnInit {
             summary: 'Success',
             detail: 'Saved successfully',
           })
-        },
+          this.router.navigateByUrl('/offers')
+        }, error: (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err.error,
+          })
+        }
       })
     } else {
       this.offerService.save(this.offer).subscribe({
@@ -97,7 +105,15 @@ export class OfferDetailsComponent implements OnInit {
             summary: 'Success',
             detail: 'Saved successfully',
           })
-        },
+          this.router.navigateByUrl('/offers')
+
+        }, error: (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err.error,
+          })
+        }
       })
     }
   }

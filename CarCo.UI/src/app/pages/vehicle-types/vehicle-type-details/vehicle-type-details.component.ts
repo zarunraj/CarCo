@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { switchMap, of } from 'rxjs';
 import { VehicleType } from 'src/app/shared/models/vehicleType';
@@ -13,12 +13,14 @@ import { VehicleTypeService } from 'src/app/shared/services/rest_api/vehicle-typ
 export class VehicleTypeDetailsComponent implements OnInit {
   VehicleTypeId: number;
   vehicleType: VehicleType;
-  mode ='view';
+  mode = 'view';
 
   constructor(
     private service: VehicleTypeService,
-    private route: ActivatedRoute,  private messageService: MessageService,
-  ) {}
+    private route: ActivatedRoute, 
+    private messageService: MessageService,
+    private router :Router
+  ) { }
 
   ngOnInit(): void {
     this.vehicleType = new VehicleType()
@@ -27,13 +29,13 @@ export class VehicleTypeDetailsComponent implements OnInit {
       if (this.VehicleTypeId > 0) {
         this.loadVehicleTypeDetails(this.VehicleTypeId)
       } else {
-        this.mode = 'edit' 
+        this.mode = 'edit'
       }
     })
   }
 
 
-  
+
   loadVehicleTypeDetails(id: number) {
     this.service.getVehicleType(id).subscribe({
       next: (data) => {
@@ -57,7 +59,7 @@ export class VehicleTypeDetailsComponent implements OnInit {
   }
 
   switchToEditMode() {
-    this.mode = 'edit' 
+    this.mode = 'edit'
   }
   onSaveClick() {
     if (this.VehicleTypeId > 0) {
@@ -70,7 +72,14 @@ export class VehicleTypeDetailsComponent implements OnInit {
             summary: 'Success',
             detail: 'Saved successfully',
           })
-        },
+          this.router.navigateByUrl(`/vehicletypes`)
+        }, error: (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err.error,
+          })
+        }
       })
     } else {
       this.service.save(this.vehicleType).subscribe({
@@ -82,7 +91,14 @@ export class VehicleTypeDetailsComponent implements OnInit {
             summary: 'Success',
             detail: 'Saved successfully',
           })
-        },
+          this.router.navigateByUrl(`/vehicletypes`)
+        }, error: (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err.error,
+          })
+        }
       })
     }
   }

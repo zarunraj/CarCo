@@ -46,7 +46,7 @@ export class OffersService  extends ApiService {
   
 
   deleteOffer(id: number) {
-    const serviceUrl = `api/offer/${id}`
+    const serviceUrl = `api/offers/${id}`
     return this.delete(serviceUrl)
   }
 }

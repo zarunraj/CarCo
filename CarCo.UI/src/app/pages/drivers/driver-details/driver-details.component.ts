@@ -17,7 +17,7 @@ export class DriverDetailsComponent implements OnInit {
   driver: Driver
   mode = 'view'
   drivingLicenseUrl = ''
-  driverProfilePhoto = ''
+  driverProfilePhoto = 'assets/images/users/user-dummy-img.jpg'
   constructor(
     private driverService: DriversService,
     private route: ActivatedRoute, private messageService: MessageService,
@@ -26,9 +26,10 @@ export class DriverDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.driver = new Driver()
-
+this.driver.IsOnline =false
     this.getDriverId(() => {
       if (this.driverId > 0) {
+        this.mode ='view'
         this.loadDriverDetails(this.driverId)
       } else {
         this.mode = 'edit'
@@ -42,7 +43,7 @@ export class DriverDetailsComponent implements OnInit {
         altInput: true,
         altFormat: 'F j, Y',
         dateFormat: 'Y-m-d',
-        minDate:new Date()
+        minDate: new Date()
       }
       flatpickr('#dtpExpiry', options)
     }, 500)
@@ -85,6 +86,28 @@ export class DriverDetailsComponent implements OnInit {
     this.bindControls()
   }
   onSaveClick() {
+    if (!this.driver.Name) {
+      this.messageService.add({ severity: 'error', summary: 'Name is required', })
+      return false;
+    }
+    if (!this.driver.Phone) {
+      this.messageService.add({ severity: 'error', summary: 'Phone is required', })
+      return false;
+    }
+    if (!this.driver.Email) {
+      this.messageService.add({ severity: 'error', summary: 'Email is required', })
+      return false;
+    }
+    if (!this.driver.DrivingLicenseNumber) {
+      this.messageService.add({ severity: 'error', summary: 'Driving License Number is required', })
+      return false;
+    }
+    if (!this.driver.DrivingLicenseExpiryDate) {
+      this.messageService.add({ severity: 'error', summary: 'Driving License Expiry is required', })
+      return false;
+    }
+
+
     if (this.driverId > 0) {
       this.driverService.edit(this.driverId, this.driver).subscribe({
         next: (data) => {
@@ -95,10 +118,10 @@ export class DriverDetailsComponent implements OnInit {
             summary: 'Success',
             detail: 'Saved successfully',
           })
-        },error:(err)=>{
+        }, error: (err) => {
           this.messageService.add({
             severity: 'error',
-            summary: 'Error', 
+            summary: 'Error',
           })
         }
       })
@@ -114,14 +137,15 @@ export class DriverDetailsComponent implements OnInit {
           })
           this.setProfilePhotoUrl()
           this.router.navigateByUrl('drivers/' + this.driverId)
-        },error:(err)=>{
+        }, error: (err) => {
           this.messageService.add({
             severity: 'error',
-            summary: 'Error', 
+            summary: 'Error',
           })
         }
       })
     }
+    return
   }
 
   onDrivingLicensePhotoChange(event: any) {
@@ -138,9 +162,10 @@ export class DriverDetailsComponent implements OnInit {
       },
     })
   }
-
+  driverProfileImages: any[] = []
   onDriverPhotoChange(event: any) {
     let image = event.target.files[0]
+    this.driverProfileImages = [...event.target.files];
     this.driverService.uploadDriverPhoto(this.driverId, image).subscribe({
       next: (data) => {
         this.messageService.add({
