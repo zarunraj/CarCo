@@ -8,6 +8,7 @@ import { Driver } from 'src/app/shared/models/driver'
 import { VehicleType } from 'src/app/shared/models/vehicleType'
 import { VehicleTypeService } from 'src/app/shared/services/rest_api/vehicle-type.service'
 import { DriversService } from 'src/app/shared/services/rest_api/drivers.service'
+import { HttpEventType } from '@angular/common/http'
 
 @Component({
   selector: 'app-new-vehicle',
@@ -202,77 +203,90 @@ export class NewVehicleComponent implements OnInit, AfterContentInit {
 
   onVehiclePhotoChange(event: any) {
     this.vehicle.Image = null;
+    let params = { SelectedCarID: this.vehicle.C_Id, DocumnetType: 'car' }
     this.carsService
-      .uploadImage(event.target.files[0], this.vehicle.C_Id, 'car')
+      .uploadImage(event, params)
       .subscribe({
         next: (data) => {
-          this.vehicle = data
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Uploaded vehicle photo', })
+          if (data.type == HttpEventType.Response) {
+            this.vehicle = data.body
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Uploaded vehicle photo', })
+          }
         },
       })
   }
 
   onInsurancePhotoChange(event: any) {
-    this.insurancePhoto = event.target.files[0]
-    this.vehicle.Insurance_Image = null;
+    let params = { SelectedCarID: this.vehicle.C_Id, DocumnetType: 'insurance' }
     this.carsService
-      .uploadImage(this.insurancePhoto, this.vehicle.C_Id, 'insurance')
+      .uploadImage(event, params)
       .subscribe({
         next: (data) => {
-          this.vehicle = data;
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Uploaded insurance photo', })
-
+          if (data.type == HttpEventType.Response) {
+            this.vehicle = data.body;
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Uploaded insurance photo', })
+          }
         },
       })
   }
   onRCPhotoChange(event: any) {
-    this.rcPhoto = event.target.files[0]
     this.vehicle.RC_Book_Image = null;
+    let params = { SelectedCarID: this.vehicle.C_Id, DocumnetType: 'rcbook' }
     this.carsService
-      .uploadImage(this.rcPhoto, this.vehicle.C_Id, 'rcbook')
+      .uploadImage(event, params)
       .subscribe({
         next: (data) => {
-          this.vehicle = data
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Uploaded RC photo', })
+          if (data.type == HttpEventType.Response) {
+            this.vehicle = data.body
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Uploaded RC photo', })
+          }
         },
       })
   }
   onPollutionPhotoChange(event: any) {
-    this.pollutionPhoto = event.target.files[0]
+    this.pollutionPhoto = event
     this.vehicle.Pollution_Certificate = null;
+    let params = { SelectedCarID: this.vehicle.C_Id, DocumnetType: 'pollution' }
     this.carsService
-      .uploadImage(this.pollutionPhoto, this.vehicle.C_Id, 'pollution')
+      .uploadImage(event, params)
       .subscribe({
         next: (data) => {
-          this.vehicle = data
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Uploaded pollution photo', })
-
+          if (data.type == HttpEventType.Response) {
+            this.vehicle = data.body
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Uploaded pollution photo', })
+          }
         },
       })
   }
 
   onPermitPhotoChange(event: any) {
-    this.permitPhoto = event.target.files[0]
+    this.permitPhoto = event
     this.vehicle.Permit_Image = null;
+    let params = { SelectedCarID: this.vehicle.C_Id, DocumnetType: 'permit' }
     this.carsService
-      .uploadImage(this.permitPhoto, this.vehicle.C_Id, 'permit')
+      .uploadImage(event, params)
       .subscribe({
         next: (data) => {
-          this.vehicle = data
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Uploaded permit photo', })
+          if (data.type == HttpEventType.Response) {
+            this.vehicle = data.body
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Uploaded permit photo', })
+          }
         },
       })
   }
 
   onTaxPhotoChange(event: any) {
-    this.taxPhoto = event.target.files[0]
+    this.taxPhoto = event
     this.vehicle.Tax_Image = null;
+    let params = { SelectedCarID: this.vehicle.C_Id, DocumnetType: 'tax' }
     this.carsService
-      .uploadImage(this.taxPhoto, this.vehicle.C_Id, 'tax')
+      .uploadImage(event, params)
       .subscribe({
         next: (data) => {
-          this.vehicle = data
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Uploaded Tax photo', })
+          if (data.type == HttpEventType.Response) {
+            this.vehicle = data.body
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Uploaded Tax photo', })
+          }
         },
       })
   }

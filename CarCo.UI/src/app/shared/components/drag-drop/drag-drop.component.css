@@ -1,0 +1,20 @@
+.fileupload{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: dashed 1px #DDD;
+    padding: 15px;
+}
+
+.ddinfo{
+    min-height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.remove-photo {
+    
+    color: #f06548;
+    text-decoration: underline;
+    cursor: pointer;
+}

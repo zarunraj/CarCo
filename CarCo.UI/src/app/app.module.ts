@@ -44,6 +44,8 @@ import { VehicleTypeDetailsComponent } from './pages/vehicle-types/vehicle-type-
 import { TooltipModule } from 'primeng/tooltip';
 import { DropdownModule } from 'primeng/dropdown';
 import { HttpInterceptorService } from './shared/services/http-interceptor.service';
+import { DragDropComponent } from './shared/components/drag-drop/drag-drop.component'; 
+import { DragDropFileUploadDirective } from './shared/components/drag-drop/drag-drop-file-upload.directive';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,8 @@ import { HttpInterceptorService } from './shared/services/http-interceptor.servi
     OfferDetailsComponent,
     VehicleTypesComponent,
     VehicleTypeDetailsComponent,
+    DragDropComponent,
+    DragDropFileUploadDirective,
 
   ],
   imports: [

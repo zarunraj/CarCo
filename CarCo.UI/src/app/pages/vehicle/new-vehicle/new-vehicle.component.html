@@ -192,7 +192,7 @@
                             </div>
                             <div class="text-center">
                                 <div class="profile-user position-relative d-inline-block mx-auto mb-2">
-                                    <img *ngIf="!vehicle.Image" src="assets/images/users/user-dummy-img.jpg"
+                                    <!-- <img *ngIf="!vehicle.Image" src="assets/images/users/user-dummy-img.jpg"
                                         class="avatar-lg img-thumbnail user-profile-image">
                                     <img *ngIf="vehicle.Image" [src]="getImage('car')"
                                         class="img-thumbnail user-profile-image" style="height: 15rem; width: 15rem;">
@@ -204,7 +204,8 @@
                                                 <i class="ri-camera-fill"></i>
                                             </span>
                                         </label>
-                                    </div>
+                                    </div> -->
+                                    <mus-drag-drop (onImageReady)="onVehiclePhotoChange($event)"></mus-drag-drop>
                                 </div>
                                 <h5 class="fs-14">Add Vehicle Image</h5>
 
@@ -232,7 +233,7 @@
                         <div>
                             <div class="text-center">
                                 <div class="profile-user position-relative d-inline-block mx-auto mb-2">
-                                    <img *ngIf="!vehicle.Insurance_Image" src="assets/images/users/user-dummy-img.jpg"
+                                    <!-- <img *ngIf="!vehicle.Insurance_Image" src="assets/images/users/user-dummy-img.jpg"
                                         class="avatar-lg img-thumbnail user-profile-image">
                                     <img *ngIf="vehicle.Insurance_Image" [src]="getImage('insurance')"
                                         class="img-thumbnail user-profile-image" style="height: 15rem; width: 15rem;">
@@ -244,7 +245,8 @@
                                                 <i class="ri-camera-fill"></i>
                                             </span>
                                         </label>
-                                    </div>
+                                    </div> -->
+                                    <mus-drag-drop (onImageReady)="onInsurancePhotoChange($event)"></mus-drag-drop>
                                 </div>
                                 <h5 class="fs-14">Add Insurance Certificate</h5>
 
@@ -289,7 +291,7 @@
                         <div>
                             <div class="text-center">
                                 <div class="profile-user position-relative d-inline-block mx-auto mb-2">
-                                    <img *ngIf="!vehicle.RC_Book_Image" src="assets/images/users/user-dummy-img.jpg"
+                                    <!-- <img *ngIf="!vehicle.RC_Book_Image" src="assets/images/users/user-dummy-img.jpg"
                                         class="avatar-lg img-thumbnail user-profile-image">
                                     <img *ngIf="vehicle.RC_Book_Image" [src]="getImage('rcbook')"
                                         class="img-thumbnail user-profile-image" style="height: 15rem; width: 15rem;">
@@ -301,7 +303,8 @@
                                                 <i class="ri-camera-fill"></i>
                                             </span>
                                         </label>
-                                    </div>
+                                    </div> -->
+                                    <mus-drag-drop (onImageReady)="onRCPhotoChange($event)"></mus-drag-drop>
                                 </div>
                                 <h5 class="fs-14">Add RC Certificate</h5>
 
@@ -346,7 +349,7 @@
                         <div>
                             <div class="text-center">
                                 <div class="profile-user position-relative d-inline-block mx-auto mb-2">
-                                    <img *ngIf="!vehicle.Pollution_Certificate"
+                                    <!-- <img *ngIf="!vehicle.Pollution_Certificate"
                                         src="assets/images/users/user-dummy-img.jpg"
                                         class="avatar-lg img-thumbnail user-profile-image">
                                     <img *ngIf="vehicle.Pollution_Certificate" [src]="getImage('pollution')"
@@ -359,7 +362,8 @@
                                                 <i class="ri-camera-fill"></i>
                                             </span>
                                         </label>
-                                    </div>
+                                    </div> -->
+                                    <mus-drag-drop (onImageReady)="onPollutionPhotoChange($event)"></mus-drag-drop>
                                 </div>
                                 <h5 class="fs-14">Add Pollution Certificate</h5>
 
@@ -402,7 +406,7 @@
                         <div>
                             <div class="text-center">
                                 <div class="profile-user position-relative d-inline-block mx-auto mb-2">
-                                    <img *ngIf="!vehicle.Permit_Image" src="assets/images/users/user-dummy-img.jpg"
+                                    <!-- <img *ngIf="!vehicle.Permit_Image" src="assets/images/users/user-dummy-img.jpg"
                                         class="avatar-lg img-thumbnail user-profile-image">
                                     <img *ngIf="vehicle.Permit_Image" [src]="getImage('permit')"
                                         class="img-thumbnail user-profile-image" style="height: 15rem; width: 15rem;">
@@ -414,7 +418,8 @@
                                                 <i class="ri-camera-fill"></i>
                                             </span>
                                         </label>
-                                    </div>
+                                    </div> -->
+                                    <mus-drag-drop (onImageReady)="onPermitPhotoChange($event)"></mus-drag-drop>
                                 </div>
                                 <h5 class="fs-14">Add Permit Certificate</h5>
 
@@ -446,7 +451,7 @@
                         <div>
                             <div class="text-center">
                                 <div class="profile-user position-relative d-inline-block mx-auto mb-2">
-                                    <img *ngIf="!vehicle.Tax_Image" src="assets/images/users/user-dummy-img.jpg"
+                                    <!-- <img *ngIf="!vehicle.Tax_Image" src="assets/images/users/user-dummy-img.jpg"
                                         class="avatar-lg img-thumbnail user-profile-image">
                                     <img *ngIf="vehicle.Tax_Image" [src]="getImage('tax')"
                                         class="img-thumbnail user-profile-image" style="height: 15rem; width: 15rem;">
@@ -458,7 +463,8 @@
                                                 <i class="ri-camera-fill"></i>
                                             </span>
                                         </label>
-                                    </div>
+                                    </div> -->
+                                    <mus-drag-drop (onImageReady)="onTaxPhotoChange($event)"></mus-drag-drop>
                                 </div>
                                 <h5 class="fs-14">Add Tax Certificate</h5>
 

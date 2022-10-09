@@ -31,13 +31,18 @@ export class CarsService extends ApiService {
     return this.post(serviceUrl, model)
   }
 
-  uploadImage(file: any, vehicleId: number, documnetType: string) {
+  uploadImage(file: any, params: any) {
     const formData = new FormData()
     formData.append('file', file, file.name)
-    formData.append('SelectedCarID', vehicleId.toString())
-    formData.append('DocumnetType', documnetType)
+    Object.keys(params).filter(key => key != 'file').forEach(key => formData.append(key, params[key]))
 
-    return this.post('api/cars/photos', formData)
+    // formData.append('SelectedCarID', vehicleId.toString())
+    // formData.append('DocumnetType', documnetType)
+
+    return this.post('api/cars/photos', formData, {
+      reportProgress: true,
+      observe: 'events',
+    })
   }
 
   updateCar(id: number, model: vehicle) {

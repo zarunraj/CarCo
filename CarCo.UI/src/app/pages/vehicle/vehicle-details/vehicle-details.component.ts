@@ -96,8 +96,9 @@ export class VehicleDetailsComponent implements OnInit, AfterContentInit {
 
   onVehiclePhotoChange(event: any) {
     this.vehiclePhoto = [...event.addedFiles]
+    let  params={SelectedCarID:this.vehicle.C_Id,DocumnetType:'car'}
     this.carsService
-      .uploadImage(this.vehiclePhoto[0], this.vehicle.C_Id, 'car')
+      .uploadImage(this.vehiclePhoto[0], params)
       .subscribe({
         next: (data) => {
          
@@ -112,8 +113,9 @@ export class VehicleDetailsComponent implements OnInit, AfterContentInit {
 
   onInsurancePhotoChange(event: any) {
     this.insurancePhoto = [...event.addedFiles]
+    let  params={SelectedCarID:this.vehicle.C_Id,DocumnetType:'insurance'}
     this.carsService
-      .uploadImage(this.insurancePhoto[0], this.vehicle.C_Id, 'insurance')
+      .uploadImage(this.insurancePhoto[0], params)
       .subscribe({
         next: (data) => {
          
@@ -127,8 +129,9 @@ export class VehicleDetailsComponent implements OnInit, AfterContentInit {
   }
   onRCPhotoChange(event: any) {
     this.rcPhoto = [...event.addedFiles]
+    let  params={SelectedCarID:this.vehicle.C_Id,DocumnetType:'rcbook'}
     this.carsService
-      .uploadImage(this.rcPhoto[0], this.vehicle.C_Id, 'rcbook')
+      .uploadImage(this.rcPhoto[0],params)
       .subscribe({
         next: (data) => {
           
@@ -142,8 +145,9 @@ export class VehicleDetailsComponent implements OnInit, AfterContentInit {
   }
   onPollutionPhotoChange(event: any) {
     this.pollutionPhoto = [...event.addedFiles]
+    let  params={SelectedCarID:this.vehicle.C_Id,DocumnetType:'pollution'}
     this.carsService
-      .uploadImage(this.pollutionPhoto[0], this.vehicle.C_Id, 'pollution')
+      .uploadImage(this.pollutionPhoto[0], params)
       .subscribe({
         next: (data) => {
           console.log('uploaded pollution photo')
@@ -158,8 +162,9 @@ export class VehicleDetailsComponent implements OnInit, AfterContentInit {
 
   onPermitPhotoChange(event: any) {
     this.permitPhoto = [...event.addedFiles]
+    let  params={SelectedCarID:this.vehicle.C_Id,DocumnetType:'permit'}
     this.carsService
-      .uploadImage(this.permitPhoto[0], this.vehicle.C_Id, 'permit')
+      .uploadImage(this.permitPhoto[0], params)
       .subscribe({
         next: (data) => {
           console.log('uploaded permit photo')
@@ -174,8 +179,9 @@ export class VehicleDetailsComponent implements OnInit, AfterContentInit {
 
   onTaxPhotoChange(event: any) {
     this.taxPhoto = [...event.addedFiles]
+   let  params={SelectedCarID:this.vehicle.C_Id,DocumnetType:'tax'}
     this.carsService
-      .uploadImage(this.taxPhoto[0], this.vehicle.C_Id, 'tax')
+      .uploadImage(this.taxPhoto[0], params)
       .subscribe({
         next: (data) => {
           console.log('uploaded permit photo')

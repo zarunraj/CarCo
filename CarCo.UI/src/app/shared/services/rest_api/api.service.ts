@@ -35,10 +35,11 @@ export class ApiService {
   }
 
 
-  protected post(url: string, data: any): Observable<any> {
+  protected post(url: string, data: any, _options?:any): Observable<any> {
     const serviceUrl = `${environment.apiUrl}${url}`;
     const params = new HttpParams().set('_key', Math.random().toString());
-    const options: any = {
+    const options: any = {     
+      ..._options,
       params: params
     };
     if (this.authService.CurrentUser) {

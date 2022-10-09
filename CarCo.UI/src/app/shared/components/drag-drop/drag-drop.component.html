@@ -1,0 +1,32 @@
+<div class="container fileUploadWrapper p-0">
+  <form [formGroup]="form">
+    <div class="row">
+      <!-- Progress Bar -->
+      <div class="col-md-12" *ngIf="progress">
+        <div class="progress form-group">
+          <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress"></div>
+        </div>
+      </div>
+
+      <div class="col-md-12" *ngIf="!(form.value.avatar?.length>0)">
+        <div class="fileupload" appDragDropFileUpload (click)="fileField.click()" (fileDropped)="upload($event)">
+          <span class="ddinfo">Choose a file or drag here</span>
+          <input type="file" name="avatars" #fileField (change)="upload($any($event).target.files)" hidden />
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="image-list" *ngFor="let file of fileArr; let i = index">
+          <div class="profile text-center">
+            <div style="position: relative;">
+              <img [src]="sanitize(file['url'])" alt="" />
+              <p>{{ file.item.name }}</p>
+              <div class="remove-photo" (click)="onRemovePhoto()">remove image</div>
+            </div>
+          </div>
+        </div>
+        <p class="message">{{ msg }}</p>
+      </div>
+    </div>
+  </form>
+</div>
