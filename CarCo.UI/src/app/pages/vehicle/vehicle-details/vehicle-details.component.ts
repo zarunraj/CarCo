@@ -1,3 +1,4 @@
+import { HttpEventType } from '@angular/common/http'
 import { AfterContentInit, Component, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import flatpickr from 'flatpickr'
@@ -62,7 +63,7 @@ export class VehicleDetailsComponent implements OnInit, AfterContentInit {
   }
 
   bindControls() {
-    const options = { altInput: true, altFormat: 'F j, Y', dateFormat: 'Y-m-d', minDate:new Date() }
+    const options = { altInput: true, altFormat: 'F j, Y', dateFormat: 'Y-m-d', minDate: new Date() }
     flatpickr('#dtpInsuranceExpiry', options)
     flatpickr('#dtpRCExpiry', options)
     flatpickr('#dtpPollutionExpiry', options)
@@ -95,101 +96,104 @@ export class VehicleDetailsComponent implements OnInit, AfterContentInit {
   }
 
   onVehiclePhotoChange(event: any) {
-    this.vehiclePhoto = [...event.addedFiles]
-    let  params={SelectedCarID:this.vehicle.C_Id,DocumnetType:'car'}
+    let params = { SelectedCarID: this.vehicle.C_Id, DocumnetType: 'car' }
     this.carsService
-      .uploadImage(this.vehiclePhoto[0], params)
+      .uploadImage(event, params)
       .subscribe({
         next: (data) => {
-         
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'image updated successfully',
-          })
+          if (data.type == HttpEventType.Response) {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'image updated successfully',
+            })
+          }
         },
       })
   }
 
   onInsurancePhotoChange(event: any) {
-    this.insurancePhoto = [...event.addedFiles]
-    let  params={SelectedCarID:this.vehicle.C_Id,DocumnetType:'insurance'}
+    let params = { SelectedCarID: this.vehicle.C_Id, DocumnetType: 'insurance' }
     this.carsService
-      .uploadImage(this.insurancePhoto[0], params)
+      .uploadImage(event, params)
       .subscribe({
         next: (data) => {
-         
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'image updated successfully',
-          })
+          if (data.type == HttpEventType.Response) {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'image updated successfully',
+            })
+          }
         },
       })
   }
   onRCPhotoChange(event: any) {
-    this.rcPhoto = [...event.addedFiles]
-    let  params={SelectedCarID:this.vehicle.C_Id,DocumnetType:'rcbook'}
+    let params = { SelectedCarID: this.vehicle.C_Id, DocumnetType: 'rcbook' }
     this.carsService
-      .uploadImage(this.rcPhoto[0],params)
+      .uploadImage(event, params)
       .subscribe({
         next: (data) => {
-          
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'image updated successfully',
-          })
+          if (data.type == HttpEventType.Response) {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'image updated successfully',
+            })
+          }
         },
       })
   }
   onPollutionPhotoChange(event: any) {
-    this.pollutionPhoto = [...event.addedFiles]
-    let  params={SelectedCarID:this.vehicle.C_Id,DocumnetType:'pollution'}
+    let params = { SelectedCarID: this.vehicle.C_Id, DocumnetType: 'pollution' }
     this.carsService
-      .uploadImage(this.pollutionPhoto[0], params)
+      .uploadImage(event, params)
       .subscribe({
         next: (data) => {
-          console.log('uploaded pollution photo')
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'image updated successfully',
-          })
+          if (data.type == HttpEventType.Response) {
+            console.log('uploaded pollution photo')
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'image updated successfully',
+            })
+          }
         },
       })
   }
 
   onPermitPhotoChange(event: any) {
-    this.permitPhoto = [...event.addedFiles]
-    let  params={SelectedCarID:this.vehicle.C_Id,DocumnetType:'permit'}
+    let params = { SelectedCarID: this.vehicle.C_Id, DocumnetType: 'permit' }
     this.carsService
-      .uploadImage(this.permitPhoto[0], params)
+      .uploadImage(event, params)
       .subscribe({
         next: (data) => {
-          console.log('uploaded permit photo')
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'image updated successfully',
-          })
+          if (data.type == HttpEventType.Response) {
+            console.log('uploaded permit photo')
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'image updated successfully',
+            })
+          }
         },
       })
   }
 
   onTaxPhotoChange(event: any) {
-    this.taxPhoto = [...event.addedFiles]
-   let  params={SelectedCarID:this.vehicle.C_Id,DocumnetType:'tax'}
+    let params = { SelectedCarID: this.vehicle.C_Id, DocumnetType: 'tax' }
     this.carsService
-      .uploadImage(this.taxPhoto[0], params)
+      .uploadImage(event, params)
       .subscribe({
         next: (data) => {
-          console.log('uploaded permit photo')
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'image updated successfully',
-          })
+          if (data.type == HttpEventType.Response) {
+            console.log('uploaded permit photo')
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'image updated successfully',
+            })
+          }
         },
       })
   }
@@ -207,7 +211,7 @@ export class VehicleDetailsComponent implements OnInit, AfterContentInit {
 
   onSaveClick() {
     this.carsService.updateCar(this.vehicle.C_Id, this.vehicle).subscribe({
-      next: (data) => { 
+      next: (data) => {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',

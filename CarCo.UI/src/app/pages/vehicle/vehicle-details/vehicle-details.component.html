@@ -111,20 +111,11 @@
                             justify-content: center;
                         ">
                                 <ng-container *ngIf="pageMode =='edit'">
-                                    <ngx-dropzone (change)="onVehiclePhotoChange($event)">
-                                        <ngx-dropzone-label>Drop photo here</ngx-dropzone-label>
-                                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
-                                            [removable]="true" *ngFor="let f of vehiclePhoto" [file]="f"
-                                            (removed)="onRemove(f)">
-
-                                        </ngx-dropzone-image-preview>
-                                    </ngx-dropzone>
+                                    <mus-drag-drop (onImageReady)="onVehiclePhotoChange($event)"></mus-drag-drop>
                                 </ng-container>
                                 <ng-container *ngIf="pageMode =='view'">
                                     <div class="flex-shrink-0 text-center mb-2">
-
                                         <img [src]="getImage('car')" alt="" style="width: 100%;">
-
                                     </div>
                                 </ng-container>
                             </div>
@@ -270,14 +261,8 @@
 
                             <div class="col-lg-6">
                                 <ng-container *ngIf="pageMode =='edit'">
-                                    <ngx-dropzone (change)="onInsurancePhotoChange($event)">
-                                        <ngx-dropzone-label>Drop photo here</ngx-dropzone-label>
-                                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
-                                            [removable]="true" *ngFor="let f of insurancePhoto" [file]="f"
-                                            (removed)="onRemove(f)">
+                                    <mus-drag-drop (onImageReady)="onInsurancePhotoChange($event)"></mus-drag-drop>
 
-                                        </ngx-dropzone-image-preview>
-                                    </ngx-dropzone>
                                 </ng-container>
                                 <ng-container *ngIf="pageMode =='view'">
                                     <div class="flex-shrink-0 text-center mb-2 border">
@@ -315,14 +300,8 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <ng-container *ngIf="pageMode =='edit'">
-                                    <ngx-dropzone (change)="onRCPhotoChange($event)">
-                                        <ngx-dropzone-label>Drop photo here</ngx-dropzone-label>
-                                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
-                                            [removable]="true" *ngFor="let f of rcPhoto" [file]="f"
-                                            (removed)="onRemove(f)">
+                                    <mus-drag-drop (onImageReady)="onRCPhotoChange($event)"></mus-drag-drop>
 
-                                        </ngx-dropzone-image-preview>
-                                    </ngx-dropzone>
                                 </ng-container>
                                 <ng-container *ngIf="pageMode =='view'">
                                     <div class="flex-shrink-0 text-center mb-2 border">
@@ -361,14 +340,8 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <ng-container *ngIf="pageMode =='edit'">
-                                    <ngx-dropzone (change)="onPollutionPhotoChange($event)">
-                                        <ngx-dropzone-label>Drop photo here</ngx-dropzone-label>
-                                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
-                                            [removable]="true" *ngFor="let f of pollutionPhoto" [file]="f"
-                                            (removed)="onRemove(f)">
+                                    <mus-drag-drop (onImageReady)="onPollutionPhotoChange($event)"></mus-drag-drop>
 
-                                        </ngx-dropzone-image-preview>
-                                    </ngx-dropzone>
                                 </ng-container>
                                 <ng-container *ngIf="pageMode =='view'">
                                     <div class="flex-shrink-0 text-center mb-2 border">
@@ -405,14 +378,8 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <ng-container *ngIf="pageMode =='edit'">
-                                    <ngx-dropzone (change)="onPermitPhotoChange($event)">
-                                        <ngx-dropzone-label>Drop photo here</ngx-dropzone-label>
-                                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
-                                            [removable]="true" *ngFor="let f of permitPhoto" [file]="f"
-                                            (removed)="onRemove(f)">
 
-                                        </ngx-dropzone-image-preview>
-                                    </ngx-dropzone>
+                                    <mus-drag-drop (onImageReady)="onPermitPhotoChange($event)"></mus-drag-drop>
                                 </ng-container>
                                 <ng-container *ngIf="pageMode =='view'">
                                     <div class="flex-shrink-0 text-center mb-2 border">
@@ -435,14 +402,8 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <ng-container *ngIf="pageMode =='edit'">
-                                    <ngx-dropzone (change)="onTaxPhotoChange($event)">
-                                        <ngx-dropzone-label>Drop photo here</ngx-dropzone-label>
-                                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
-                                            [removable]="true" *ngFor="let f of taxPhoto" [file]="f"
-                                            (removed)="onRemove(f)">
-
-                                        </ngx-dropzone-image-preview>
-                                    </ngx-dropzone>
+                                    <mus-drag-drop (onImageReady)="onTaxPhotoChange($event)"></mus-drag-drop>
+                                  
                                 </ng-container>
                                 <ng-container *ngIf="pageMode =='view'">
                                     <div class="flex-shrink-0 text-center mb-2 border">
