@@ -16,7 +16,7 @@ namespace CarCo.Api.Core.Controllers
 {
     [Route("api/[controller]")]
 
-    [TypeFilter(typeof(APIAdminAuthorizeAttribute))]
+   
     [EnableCors("CorsApi")]
     public class DriverController : Controller
     {
@@ -31,6 +31,7 @@ namespace CarCo.Api.Core.Controllers
 
         // GET: api/values
         [HttpGet]
+        [TypeFilter(typeof(APIAdminAuthorizeAttribute))]
         public DriverTB[] Get()
         {
             try
@@ -45,6 +46,7 @@ namespace CarCo.Api.Core.Controllers
         }
         // GET api/values/5
         [HttpGet("{id}")]
+        [TypeFilter(typeof(APIAdminAuthorizeAttribute))]
         public DriverTB Get(int id)
         {
             try
@@ -60,6 +62,7 @@ namespace CarCo.Api.Core.Controllers
 
         // POST api/values
         [HttpPost]
+        [TypeFilter(typeof(APIAdminAuthorizeAttribute))]
         public IActionResult Post([FromBody] DriverTB drivertb)
         {
             try
@@ -79,42 +82,40 @@ namespace CarCo.Api.Core.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public bool Put(int id, [FromBody] DriverTB drivertb)
+        [TypeFilter(typeof(APIAdminAuthorizeAttribute))]
+        public IActionResult Put(int id, [FromBody] DriverTB drivertb)
         {
             try
             {
                 if (string.IsNullOrEmpty(Convert.ToString(id)))
                 {
-                    return false;
+                    return NotFound();
                 }
 
                 if (drivertb == null)
                 {
-                    return false;
+                    return NotFound();
                 }
 
-                var driverupdate = new DriverTB
-                {
-                    IsActive = true,
-                    Name = Convert.ToString(id),
-                    Address = Convert.ToString(drivertb.Address),
-                    DrivingLicenseExpiryDate = Convert.ToDateTime(drivertb.DrivingLicenseExpiryDate),
-                    DrivingLicenseNumber = Convert.ToString(drivertb.DrivingLicenseNumber),
-                    Email = Convert.ToString(drivertb.Email),
-                    Phone = Convert.ToString(drivertb.Phone),
-                };
-
                 var db = _DatabaseContext;
-                db.DriverTB.Attach(driverupdate);
-                db.Entry(driverupdate).Property(x => x.Name).IsModified = true;
-                db.Entry(driverupdate).Property(x => x.Address).IsModified = true;
-                db.Entry(driverupdate).Property(x => x.DrivingLicenseExpiryDate).IsModified = true;
-                db.Entry(driverupdate).Property(x => x.DrivingLicenseNumber).IsModified = true;
-                db.Entry(driverupdate).Property(x => x.Email).IsModified = true;
-                db.Entry(driverupdate).Property(x => x.Phone).IsModified = true;
-                db.Entry(driverupdate).Property(x => x.IsActive).IsModified = true;
+
+                var driver = db.DriverTB.Find(id);
+                if(driver is null)
+                {
+                    return NotFound();
+                }
+                driver.Name =drivertb?.Name;
+                driver.Address = Convert.ToString(drivertb?.Address);
+                driver.DrivingLicenseExpiryDate=Convert.ToDateTime(drivertb?.DrivingLicenseExpiryDate);
+                driver.DrivingLicenseNumber = drivertb?.DrivingLicenseNumber;
+                driver.CurrentLocation = drivertb?.CurrentLocation;
+                driver.Email = drivertb?.Email;
+                driver.Phone = drivertb?.Phone;
+                driver.IsActive = drivertb.IsActive;
+
+               
                 db.SaveChanges();
-                return true;
+                return Ok(driver);
             }
             catch (Exception)
             {
@@ -126,6 +127,7 @@ namespace CarCo.Api.Core.Controllers
 
         // PUT api/values/5
         [HttpDelete("{id}")]
+        [TypeFilter(typeof(APIAdminAuthorizeAttribute))]
         public async Task<IActionResult> Delete(int id)
         {
             var driver = await _DatabaseContext.DriverTB.FindAsync(id);

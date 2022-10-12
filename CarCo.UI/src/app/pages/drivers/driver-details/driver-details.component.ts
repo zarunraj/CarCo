@@ -52,7 +52,7 @@ this.driver.IsOnline =false
     this.driverService.getDriver(id).subscribe({
       next: (data) => {
         this.driver = data
-        this.drivingLicenseUrl = `${environment.apiUrl}/api/driver/${this.driverId}/drivinglicense`
+        this.drivingLicenseUrl = `${environment.apiUrl}api/driver/${this.driverId}/drivinglicense`
         this.setProfilePhotoUrl();
       },
       error: (err) => console.error(err),
@@ -63,7 +63,7 @@ this.driver.IsOnline =false
     if (this.driver.ProfileImage) {
       setTimeout(() => {
 
-        this.driverProfilePhoto = `${environment.apiUrl}/api/driver/${this.driverId}/profilePhoto?key=${Math.random()}`
+        this.driverProfilePhoto = `${environment.apiUrl}api/driver/${this.driverId}/profilePhoto?key=${Math.random()}`
       }, 500);
     }
   }
@@ -149,7 +149,7 @@ this.driver.IsOnline =false
   }
 
   onDrivingLicensePhotoChange(event: any) {
-    let image = event.target.files[0]
+    let image = event
 
     this.driverService.uploadLicense(this.driverId, image).subscribe({
       next: (data) => {
@@ -158,15 +158,15 @@ this.driver.IsOnline =false
           summary: 'Success',
           detail: 'Image Saved successfully',
         })
-        this.drivingLicenseUrl = `${environment.apiUrl}/api/driver/${this.driverId}/drivinglicense`
+        this.drivingLicenseUrl = `${environment.apiUrl}api/driver/${this.driverId}/drivinglicense`
       },
     })
   }
   driverProfileImages: any[] = []
   onDriverPhotoChange(event: any) {
-    let image = event.target.files[0]
-    this.driverProfileImages = [...event.target.files];
-    this.driverService.uploadDriverPhoto(this.driverId, image).subscribe({
+     
+    this.driverProfileImages = [event];
+    this.driverService.uploadDriverPhoto(this.driverId, event).subscribe({
       next: (data) => {
         this.messageService.add({
           severity: 'success',

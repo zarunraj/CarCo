@@ -10,17 +10,9 @@ import { CarsService } from '../shared/services/rest_api/cars.service';
 export class DashboardComponent implements OnInit {
 
   constructor(public carService: CarsService) { }
-
-  params = { SelectedCarID: 20, DocumnetType: 'image' }
-
-  uploadFn = () => this.carService.uploadImage;
+ 
 
   ngOnInit(): void {
   }
-
-  onImageReady(event: any) {
-    this.carService.uploadImage(event, this.params).subscribe((event: HttpEvent<any>) => {
-   
-    });
-  }
+ 
 }
